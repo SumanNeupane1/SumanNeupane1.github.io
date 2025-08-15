@@ -1,16 +1,35 @@
 /* ========== Year in footer ========== */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ========== Mobile nav ========== */
-const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-navToggle?.addEventListener('click', (e) => {
-  const open = navLinks.classList.toggle('open');
-  e.currentTarget.setAttribute('aria-expanded', open ? 'true' : 'false');
-});
-navLinks?.querySelectorAll('a').forEach(a =>
-  a.addEventListener('click', () => navLinks.classList.remove('open'))
-);
+// Mobile nav (accessible)
+const toggleBtn = document.getElementById('navToggle');
+const menu = document.getElementById('primaryNav');
+
+function openMenu(){
+  menu.hidden = false;
+  menu.classList.add('open');
+  toggleBtn.classList.add('is-open');
+  toggleBtn.setAttribute('aria-expanded','true');
+}
+function closeMenu(){
+  menu.hidden = true;
+  menu.classList.remove('open');
+  toggleBtn.classList.remove('is-open');
+  toggleBtn.setAttribute('aria-expanded','false');
+}
+
+if (toggleBtn && menu) {
+  toggleBtn.addEventListener('click', () => {
+    menu.hidden ? openMenu() : closeMenu();
+  });
+  // Close when a link is clicked
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) closeMenu();
+  }, { passive:true });
+}
+
 
 /* ========== Theme toggle with sweep ========== */
 const THEME_KEY = 'sn-theme';
