@@ -1,55 +1,113 @@
-/* ============================
-   Toggle sections + Theme switch with color veil
-   ============================ */
+/* Suman Neupane — final interactions: theme + reveal + bars + counters + progress */
 
-(function () {
-  // ---- your original section toggles (unchanged) ----
-  [...document.querySelectorAll(".control")].forEach((button) => {
-    button.addEventListener("click", function () {
-      const activeBtn = document.querySelector(".active-btn");
-      if (activeBtn) activeBtn.classList.remove("active-btn");
-      this.classList.add("active-btn");
+(() => {
+  // ===== Theme (uses .theme-btn and toggles body.light-mode) =====
+  const btn = document.querySelector('.theme-btn');
+  const KEY = 'sn-theme';
 
-      const active = document.querySelector(".active");
-      if (active) active.classList.remove("active");
-      const target = document.getElementById(button.dataset.id);
-      if (target) target.classList.add("active");
-    });
+  const setTheme = (light) => {
+    document.body.classList.toggle('light-mode', light);
+    localStorage.setItem(KEY, light ? 'light' : 'dark');
+  };
+
+  // Apply saved preference
+  const saved = localStorage.getItem(KEY);
+  if (saved === 'light') setTheme(true);
+  if (saved === 'dark') setTheme(false);
+
+  // Radial color veil on toggle
+  const flashVeil = (toLight, x, y) => {
+    const veil = document.createElement('span');
+    veil.className = 'theme-veil';
+    if (toLight) veil.setAttribute('data-mode', 'light');
+    veil.style.setProperty('--x', (x ?? innerWidth / 2) + 'px');
+    veil.style.setProperty('--y', (y ?? innerHeight / 2) + 'px');
+    document.body.appendChild(veil);
+    veil.addEventListener('animationend', () => veil.remove(), { once: true });
+  };
+
+  btn?.addEventListener('click', (e) => {
+    const nextLight = !document.body.classList.contains('light-mode');
+    const r = e.currentTarget.getBoundingClientRect();
+    flashVeil(nextLight, r.left + r.width / 2, r.top + r.height / 2);
+    setTheme(nextLight);
   });
 
-  // ---- theme: uses .theme-btn and toggles .light-mode on <body> ----
-  const THEME_KEY = "sn-theme";
-  const btn = document.querySelector(".theme-btn");
-  const isLight = () => document.body.classList.contains("light-mode");
+  // ===== Progress bar on scroll =====
+  const bar = document.querySelector('.progress-bar');
+  const onScroll = () => {
+    if (!bar) return;
+    const sc = window.scrollY;
+    const max = document.body.scrollHeight - window.innerHeight;
+    bar.style.width = Math.max(0, Math.min(100, (sc / max) * 100)) + '%';
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-  // Apply saved preference (if any)
-  const saved = localStorage.getItem(THEME_KEY);
-  if (saved === "light") document.body.classList.add("light-mode");
-  if (saved === "dark") document.body.classList.remove("light-mode");
-
-  function setTheme(light) {
-    document.body.classList.toggle("light-mode", light);
-    localStorage.setItem(THEME_KEY, light ? "light" : "dark");
-  }
-
-  function flashVeil(nextLight, x, y) {
-    const veil = document.createElement("span");
-    veil.className = `theme-veil ${nextLight ? "to-light" : "to-dark"}`;
-    veil.style.setProperty("--x", (x ?? innerWidth / 2) + "px");
-    veil.style.setProperty("--y", (y ?? innerHeight / 2) + "px");
-    document.body.appendChild(veil);
-    veil.addEventListener("animationend", () => veil.remove(), { once: true });
-  }
-
-  if (btn) {
-    btn.addEventListener("click", (e) => {
-      const nextLight = !isLight();
-      // colorful radial sweep from click position
-      const rect = e.currentTarget.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      flashVeil(nextLight, cx, cy);
-      setTheme(nextLight);
+  // ===== Reveal on view (for .reveal elements) =====
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) {
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      }
     });
-  }
+  }, { threshold: 0.18 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  // ===== Skill bars (for .bar .bar-fill + .bar-val[data-val]) =====
+  const barIO = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      const fill = el.querySelector('.bar-fill');
+      const valEl = el.querySelector('.bar-val');
+      const val = parseInt(valEl?.dataset.val || '0', 10);
+      if (fill) fill.style.width = val + '%';
+      if (valEl) {
+        let n = 0;
+        const step = () => {
+          n += (val - n) * 0.12;
+          if (n + 0.5 < val) {
+            valEl.textContent = Math.round(n) + '%';
+            requestAnimationFrame(step);
+          } else valEl.textContent = val + '%';
+        };
+        requestAnimationFrame(step);
+      }
+      barIO.unobserve(el);
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.bar').forEach((b) => barIO.observe(b));
+
+  // ===== Number counters (for .stat-num[data-count][data-decimals][data-suffix]) =====
+  const numIO = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      const target = parseFloat(el.dataset.count || '0');
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const suffix = el.dataset.suffix || '';
+      let t0 = null;
+      const dur = 1200;
+      const tick = (ts) => {
+        if (!t0) t0 = ts;
+        const p = Math.min(1, (ts - t0) / dur);
+        const v = target * p;
+        el.textContent = v.toFixed(decimals) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      numIO.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.stat-num').forEach((n) => numIO.observe(n));
+
+  // ===== Optional: mobile nav toggle (if you have a .nav-toggle & .nav-links) =====
+  const navToggle = document.querySelector('.nav-toggle');
+  navToggle?.addEventListener('click', () => {
+    const links = document.querySelector('.nav-links');
+    const open = links?.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
 })();
