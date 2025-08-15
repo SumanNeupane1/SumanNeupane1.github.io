@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <!-- keep this path: /styles/styles.css -->
   <link rel="stylesheet" href="styles/styles.css" />
 </head>
 
@@ -69,8 +68,13 @@
           systems-admin style work (Intune/Autopilot, JAMF, AD, Exchange Online, VMware) and I’m keen
           to apply that in any environment—education, enterprise, or government.
         </p>
+
+        <!-- UPDATED: Preview + Download + Contact -->
         <div class="cta-row">
-          <a class="btn" href="sumann.pdf" download>Download CV</a>
+          <a class="btn" href="sumann.pdf" target="_blank" rel="noopener"
+             aria-label="Preview CV in a new tab">Preview CV</a>
+          <a class="btn btn-outline" href="sumann.pdf" download
+             aria-label="Download CV as PDF">Download CV</a>
           <a class="btn btn-ghost" href="#contact">Contact</a>
         </div>
 
@@ -324,7 +328,8 @@
           <div class="cta-row">
             <a class="btn" href="mailto:sumanneupane008@gmail.com">Email me</a>
             <a class="btn btn-outline" href="tel:+61450481379">Call</a>
-            <a class="btn btn-ghost" href="sumann.pdf" download>Resume</a>
+            <!-- Set the third button to Preview CV; download option is in Details below -->
+            <a class="btn btn-ghost" href="sumann.pdf" target="_blank" rel="noopener">Preview CV</a>
           </div>
         </div>
 
@@ -335,7 +340,12 @@
               <li><span>Location</span><span>Melbourne, VIC</span></li>
               <li><span>Email</span><span><a href="mailto:sumanneupane008@gmail.com">sumanneupane008@gmail.com</a></span></li>
               <li><span>Phone</span><span><a href="tel:+61450481379">0450 481 379</a></span></li>
-              <li><span>Resume</span><span><a href="sumann.pdf" download>Download PDF</a></span></li>
+              <li><span>Resume</span>
+                <span>
+                  <a href="sumann.pdf" target="_blank" rel="noopener">Preview</a> ·
+                  <a href="sumann.pdf" download>Download</a>
+                </span>
+              </li>
             </ul>
           </div>
 
@@ -389,6 +399,53 @@
     </div>
   </footer>
 
+  <!-- Helpers for theme/nav/year; app.js runs after -->
+  <script>
+    // initial theme from storage or system (CSS expects 'light-mode')
+    (function(){
+      const saved = localStorage.getItem('sn-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (saved === 'light' || (!saved && prefersLight)) document.body.classList.add('light-mode');
+
+      const btn = document.getElementById('themeToggle');
+      if (document.body.classList.contains('light-mode')) {
+        btn.textContent = '☀';
+        btn.setAttribute('aria-pressed','true');
+      }
+    })();
+
+    // toggle theme with a soft veil effect
+    document.getElementById('themeToggle')?.addEventListener('click', (e) => {
+      const goingLight = !document.body.classList.contains('light-mode');
+
+      // sweep veil
+      const veil = document.createElement('div');
+      veil.className = 'theme-veil';
+      veil.dataset.mode = goingLight ? 'light' : 'dark';
+      const r = e.currentTarget.getBoundingClientRect();
+      veil.style.setProperty('--x', `${r.left + r.width/2}px`);
+      veil.style.setProperty('--y', `${r.top + r.height/2 + window.scrollY}px`);
+      document.body.appendChild(veil);
+      veil.addEventListener('animationend', () => veil.remove(), { once:true });
+
+      document.body.classList.toggle('light-mode');
+      localStorage.setItem('sn-theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+      e.currentTarget.textContent = document.body.classList.contains('light-mode') ? '☀' : '☾';
+      e.currentTarget.setAttribute('aria-pressed', document.body.classList.contains('light-mode') ? 'true' : 'false');
+    });
+
+    // mobile nav
+    document.querySelector('.nav-toggle')?.addEventListener('click', (e) => {
+      const list = document.querySelector('.nav-links');
+      const open = list.classList.toggle('open');
+      e.currentTarget.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Your scroll/counter/reveal logic -->
   <script src="app.js"></script>
 </body>
 </html>
