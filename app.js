@@ -1,92 +1,121 @@
-// Theme, menu, scroll glass, counters, bars, reveals, progress
+/* ========== Year in footer ========== */
+document.getElementById('year').textContent = new Date().getFullYear();
 
-// Initial theme from storage/system
-(function () {
-  const saved = localStorage.getItem('sn-theme');
+/* ========== Mobile nav ========== */
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+navToggle?.addEventListener('click', (e) => {
+  const open = navLinks.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+navLinks?.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => navLinks.classList.remove('open'))
+);
+
+/* ========== Theme toggle with sweep ========== */
+const THEME_KEY = 'sn-theme';
+const btn = document.getElementById('themeToggle');
+
+function applyTheme(mode) {
+  document.body.classList.toggle('light', mode === 'light');
+  btn.textContent = mode === 'light' ? '☀' : '☾';
+  btn.setAttribute('aria-pressed', mode === 'light' ? 'true' : 'false');
+}
+(function initTheme(){
+  const saved = localStorage.getItem(THEME_KEY);
   const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-  if (saved === 'light' || (!saved && prefersLight)) {
-    document.body.classList.add('light');
-    document.getElementById('themeToggle').textContent = '☀';
-    document.getElementById('themeToggle').setAttribute('aria-pressed', 'true');
-  }
+  applyTheme(saved ?? (prefersLight ? 'light' : 'dark'));
 })();
+btn?.addEventListener('click', (e) => {
+  const to = document.body.classList.contains('light') ? 'dark' : 'light';
+  localStorage.setItem(THEME_KEY, to);
+  applyTheme(to);
 
-// Toggle theme + quick veil flash
-document.getElementById('themeToggle').addEventListener('click', (e) => {
-  const isLight = document.body.classList.toggle('light');
-  localStorage.setItem('sn-theme', isLight ? 'light' : 'dark');
-  e.currentTarget.textContent = isLight ? '☀' : '☾';
-  e.currentTarget.setAttribute('aria-pressed', isLight ? 'true' : 'false');
-
-  // subtle veil
+  // sweep veil
+  const r = e.currentTarget.getBoundingClientRect();
   const veil = document.createElement('div');
   veil.className = 'theme-veil';
+  veil.dataset.mode = to;
+  veil.style.setProperty('--x', `${r.left + r.width/2}px`);
+  veil.style.setProperty('--y', `${r.top + r.height/2}px`);
   document.body.appendChild(veil);
-  setTimeout(() => veil.remove(), 650);
+  veil.addEventListener('animationend', () => veil.remove(), { once:true });
 });
 
-// Mobile nav
-const navToggle = document.getElementById('navToggle');
-const navLinks  = document.querySelector('.nav-links');
-navToggle.addEventListener('click', () => {
-  const open = navLinks.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-});
+/* ========== Scroll progress ========== */
+const prog = document.querySelector('.progress-bar');
+function updateProgress(){
+  const h = document.documentElement;
+  const sc = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  prog.style.width = `${sc}%`;
+}
+updateProgress();
+addEventListener('scroll', updateProgress, { passive:true });
 
-// Scroll glass intensity + progress bar
-const header = document.getElementById('siteHeader');
-const progress = document.querySelector('.progress-bar');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY || document.documentElement.scrollTop;
-  if (y > 6) header.classList.add('scrolled'); else header.classList.remove('scrolled');
-
-  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const pct = (y / h) * 100;
-  progress.style.width = pct + '%';
-});
-
-// Reveal on view
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.18 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-// Animated counters
-const counterIO = new IntersectionObserver((entries, obs) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const el = entry.target;
-    const target = parseFloat(el.dataset.count || '0');
-    const decimals = parseInt(el.dataset.decimals || '0', 10);
-    const suffix = el.dataset.suffix || '';
-    const start = performance.now();
-    const dur = 1200;
-
-    function tick(t) {
-      const p = Math.min(1, (t - start) / dur);
-      const val = (target * p).toFixed(decimals);
-      el.textContent = val + suffix;
-      if (p < 1) requestAnimationFrame(tick);
+/* ========== Reveal on scroll ========== */
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach(ent => {
+    if (ent.isIntersecting) {
+      ent.target.classList.add('in');
+      revealIO.unobserve(ent.target);
     }
-    requestAnimationFrame(tick);
-    obs.unobserve(el);
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+
+/* ========== Stat counters ========== */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function animateNumber(el, to, {duration=1000, decimals=0, suffix='' }={}){
+  if (reduceMotion) { el.textContent = (+to).toFixed(decimals) + suffix; return; }
+  const start = performance.now();
+  function frame(t){
+    const p = Math.min((t - start) / duration, 1);
+    const val = to * p;
+    el.textContent = val.toFixed(decimals) + suffix;
+    if (p < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+const statIO = new IntersectionObserver((entries) => {
+  entries.forEach(ent => {
+    if (ent.isIntersecting) {
+      const el = ent.target;
+      const to = parseFloat(el.dataset.count || '0');
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const suffix = el.dataset.suffix || '';
+      animateNumber(el, to, { duration: 1100, decimals, suffix });
+      statIO.unobserve(el);
+    }
   });
 }, { threshold: 0.5 });
-document.querySelectorAll('.stat-num').forEach(el => counterIO.observe(el));
+document.querySelectorAll('.stat-num').forEach(el => statIO.observe(el));
 
-// Bars fill
-const barIO = new IntersectionObserver((entries, obs) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const valEl = entry.target.querySelector('.bar-val');
-    const fill  = entry.target.querySelector('.bar-fill');
-    const target = parseInt(valEl.dataset.val || '0', 10);
-    fill.style.width = target + '%';
-    valEl.textContent = target + '%';
-    obs.unobserve(entry.target);
+/* ========== Skill bars ========== */
+const barIO = new IntersectionObserver((entries) => {
+  entries.forEach(ent => {
+    if (ent.isIntersecting) {
+      const bar = ent.target;
+      const valEl = bar.querySelector('.bar-val');
+      const fill = bar.querySelector('.bar-fill');
+      const pct = parseFloat(valEl.dataset.val || '0');
+
+      if (reduceMotion) {
+        fill.style.width = pct + '%';
+        valEl.textContent = Math.round(pct) + '%';
+      } else {
+        const start = performance.now();
+        const dur = 900;
+        function tick(t){
+          const p = Math.min((t - start) / dur, 1);
+          const now = pct * p;
+          fill.style.width = now + '%';
+          valEl.textContent = Math.round(now) + '%';
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      barIO.unobserve(bar);
+    }
   });
-}, { threshold: 0.35 });
-document.querySelectorAll('.bar').forEach(el => barIO.observe(el));
-
-// Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
+}, { threshold: 0.4 });
+document.querySelectorAll('.bar').forEach(b => barIO.observe(b));
