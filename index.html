@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <!-- Progress bar -->
+  <!-- Progress bar (filled by app.js if you keep it) -->
   <div class="progress-bar" aria-hidden="true"></div>
 
   <!-- Header -->
@@ -37,14 +37,6 @@
           <li><a href="#setup">Setup</a></li>
           <li><a href="#education">Education</a></li>
           <li><a href="#contact">Contact</a></li>
-
-          <!-- Prominent LinkedIn in top line -->
-          <li class="nav-cta">
-            <a class="header-linkedin" href="https://www.linkedin.com/in/suman-neupane-507786182?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener" aria-label="Open LinkedIn profile">
-              <svg viewBox="0 0 24 24" class="li-ic" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zm7.5 0h3.8v2h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.15V23h-4v-6.5c0-1.55-.03-3.55-2.17-3.55-2.18 0-2.51 1.7-2.51 3.43V23h-3.8V8.5z"/></svg>
-              <span>LinkedIn</span>
-            </a>
-          </li>
         </ul>
       </nav>
 
@@ -57,12 +49,27 @@
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">IT Support • Systems • Endpoints</p>
+
+        <!-- Big LinkedIn CTA directly under eyebrow -->
+        <a class="linkedin-hero"
+           href="https://www.linkedin.com/in/suman-neupane-507786182?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+           target="_blank" rel="noopener" aria-label="Open LinkedIn profile">
+          <!-- inline SVG keeps icon perfectly centered -->
+          <svg viewBox="0 0 24 24" class="li-ic" aria-hidden="true">
+            <path fill="currentColor" d="M4.98 3.5A2.48 2.48 0 1 1 0 3.5a2.48 2.48 0 0 1 4.98 0zM.5 8.5h4V23h-4V8.5zm7.5 0h3.8v2h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.15V23h-4v-6.5c0-1.55-.03-3.55-2.17-3.55-2.18 0-2.51 1.7-2.51 3.43V23H8V8.5z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+
         <h1>Hi, I am <span>Suman Neupane</span></h1>
         <p class="lead">
-          Level 2 IT Support professional who loves solving real problems—across user support, identity, endpoint management and messaging. I’ve moved steadily into backend and systems-admin style work (Intune/Autopilot, JAMF, AD, Exchange Online, VMware) and I’m keen to apply that in any environment—education, enterprise, or government.
+          Level 2 IT Support professional who loves solving real problems—across user support,
+          identity, endpoint management and messaging. I’ve moved steadily into backend and
+          systems-admin style work (Intune/Autopilot, JAMF, AD, Exchange Online, VMware) and I’m keen
+          to apply that in any environment—education, enterprise, or government.
         </p>
         <div class="cta-row">
-          <a class="btn" href="sumann.pdf" download target="_blank" rel="noopener">Download CV</a>
+          <a class="btn" href="sumann.pdf" download>Download CV</a>
           <a class="btn btn-ghost" href="#contact">Contact</a>
         </div>
 
@@ -101,6 +108,7 @@
       </div>
 
       <ol class="timeline">
+        <!-- Lowther Hall -->
         <li class="t-item reveal">
           <div class="t-dot"></div>
           <article class="t-card card">
@@ -125,6 +133,7 @@
           </article>
         </li>
 
+        <!-- Johns Lyng Group -->
         <li class="t-item reveal">
           <div class="t-dot"></div>
           <article class="t-card card">
@@ -345,13 +354,14 @@
         </div>
       </div>
 
-      <!-- CONTACT FORM
-           If you use Formspree, paste your endpoint into data-formspree below, e.g.:
-           data-formspree="https://formspree.io/f/abcdwxyz"
-           Without it, the form falls back to mailto: and opens the user's mail client. -->
-      <form id="contactForm" class="card contact-form reveal"
-            data-formspree=""
-            data-fallback-mailto="sumanneupane008@gmail.com">
+      <!-- FormSubmit version (same pattern your original used) -->
+      <form action="https://formsubmit.co/sumanneupane009@gmail.com" method="POST" class="card contact-form reveal">
+        <!-- FormSubmit config -->
+        <input type="hidden" name="_subject" value="New message from sumanneupane1.github.io">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://sumanneupane1.github.io/#contact">
+
         <h3>Send a message</h3>
         <label>
           <span class="label">Your name</span>
@@ -381,31 +391,18 @@
     </div>
   </footer>
 
-  <!-- Lightweight form handler with Formspree + mailto fallback -->
+  <!-- Small helpers for nav + year; your existing app.js still runs below -->
   <script>
-  (function(){
-    const f = document.getElementById('contactForm');
-    if(!f) return;
-    const status = f.querySelector('.form-status');
-    const fs = f.dataset.formspree?.trim();
-    f.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = new FormData(f);
-      if (fs) {
-        try {
-          const res = await fetch(fs, { method:'POST', body: data, headers: { 'Accept':'application/json' }});
-          if (res.ok) { status.textContent = 'Thanks! Your message was sent.'; f.reset(); return; }
-        } catch(e){}
-      }
-      // Fallback to mailto
-      const to = f.dataset.fallbackMailto || 'sumanneupane008@gmail.com';
-      const subject = encodeURIComponent(data.get('subject') || 'Website enquiry');
-      const body = encodeURIComponent(
-        `Name: ${data.get('name')}\nEmail: ${data.get('email')}\n\n${data.get('message')}`
-      );
-      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    document.querySelector('.theme-btn')?.addEventListener('click', () => {
+      document.body.classList.toggle('light');
     });
-  })();
+    document.querySelector('.nav-toggle')?.addEventListener('click', (e) => {
+      const btn = e.currentTarget;
+      const list = document.querySelector('.nav-links');
+      const open = list.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 
   <script src="app.js"></script>
