@@ -95,6 +95,22 @@ h1 span{color:var(--accent)}
 .btn-ghost{background:transparent}
 .btn-outline{background:transparent;border:1px dashed var(--outline)}
 
+/* LinkedIn highlight */
+.btn-linkedin{
+  background:#0A66C2;
+  border:1px solid color-mix(in oklab,#0A66C2 60%,#fff 0%);
+  color:#fff;
+  box-shadow:0 6px 20px rgba(10,102,194,.35);
+  position:relative;
+}
+.btn-linkedin::after{
+  content:"";position:absolute;inset:-2px;border-radius:16px;
+  background:linear-gradient(90deg,rgba(10,102,194,.0),rgba(10,102,194,.35),rgba(10,102,194,.0));
+  filter:blur(6px);opacity:.6;pointer-events:none;
+}
+.li-ic{width:18px;height:18px;fill:#fff}
+
+/* Stats */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.2rem}
 @media(max-width:720px){.stats{grid-template-columns:1fr}}
 .stat-num{font-weight:800;font-size:clamp(2rem,5vw,3rem);color:var(--accent);line-height:1}
@@ -116,13 +132,16 @@ body.light .orb-2{background:rgba(73,81,109,.15)}
 .t-item{position:relative;margin:0 0 1.6rem}
 .t-dot{position:absolute;left:-.1rem;top:.9rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px color-mix(in oklab, var(--accent) 35%, transparent)}
 .t-card h3{margin:.1rem 0 .25rem}
-.company-head{display:flex;gap:.75rem;align-items:center;justify-content:space-between}
+.company-head{display:flex;gap:1rem;align-items:center;justify-content:space-between}
 .company-logo{
-  width:42px;             /* bigger logo, but tidy */
-  height:42px;
+  width:60px;             /* bigger logo */
+  height:60px;
   object-fit:contain;
-  opacity:.95;
-  filter:grayscale(100%) contrast(90%);
+  opacity:.98;
+  filter:grayscale(100%) contrast(92%);
+}
+@media(max-width:560px){
+  .company-logo{width:44px;height:44px}
 }
 .meta{color:var(--muted);font-size:.95rem;margin:.2rem 0 1rem}
 .bullets{padding-left:1.1rem;margin:0}
@@ -153,6 +172,25 @@ body.light .orb-2{background:rgba(73,81,109,.15)}
 .card h3{margin:.2rem 0 .6rem}
 .card .meta{margin-bottom:.6rem}
 .card .stack{margin-top:.6rem}
+
+/* ==== Setup (desk) ==== */
+.setup-wrap{display:grid}
+.setup-frame{
+  --r:22px;
+  background:var(--card);
+  border:1px solid var(--outline);
+  border-radius:var(--r);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  transform:perspective(1200px) rotateX(0) rotateY(0);
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+.setup-frame:hover{
+  transform:perspective(1200px) rotateX(2.2deg) rotateY(-2.2deg) translateY(-2px);
+  box-shadow:0 18px 50px rgba(0,0,0,.35);
+}
+.setup-img{width:100%;height:auto;display:block}
+.setup-frame figcaption{padding:.9rem 1rem;color:var(--muted);border-top:1px solid var(--outline)}
 
 /* ==== Contact improvements ==== */
 .contact-grid{display:grid;grid-template-columns:1fr;gap:1.2rem}
