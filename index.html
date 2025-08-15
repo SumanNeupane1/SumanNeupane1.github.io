@@ -4,32 +4,50 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Suman Neupane | IT Support and Operations</title>
+
+  <title>Suman Neupane | IT Support & Operations</title>
   <meta name="description" content="Level 2 IT Support with strengths in endpoint management, identity, messaging and infrastructure. Intune, Autopilot, JAMF, AD, Exchange Online, VMware." />
+
+  <!-- Open Graph / Twitter (controls link previews) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Suman Neupane | IT Support & Operations">
+  <meta property="og:description" content="Level 2 IT Support: Intune, Autopilot, JAMF, AD, Exchange Online, VMware.">
+  <meta property="og:url" content="https://sumanneupane.com/">
+  <!-- Put a 1200x630 image here so your portrait doesn’t appear in previews -->
+  <meta property="og:image" content="https://sumanneupane.com/img/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Suman Neupane | IT Support & Operations">
+  <meta name="twitter:description" content="Level 2 IT Support: Intune, Autopilot, JAMF, AD, Exchange Online, VMware.">
+  <meta name="twitter:image" content="https://sumanneupane.com/img/og-card.jpg">
+
+  <meta name="theme-color" content="#2e374c" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="styles/styles.css" />
 </head>
 
 <body>
-  <!-- Progress bar -->
+  <!-- Scroll progress -->
   <div class="progress-bar" aria-hidden="true"></div>
 
-  <!-- Header -->
-  <header class="site-header">
+  <!-- Header / Nav -->
+  <header class="site-header" id="top">
     <div class="container nav-row">
-      <div class="nav-left">
-        <a class="brand" href="#home">SN</a>
-      </div>
+      <a class="brand" href="#home" aria-label="Go to top">SN</a>
 
-      <nav class="nav">
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
           <span class="nav-toggle-bar"></span>
           <span class="nav-toggle-bar"></span>
           <span class="nav-toggle-bar"></span>
         </button>
-        <ul class="nav-links">
+
+        <ul class="nav-links" id="primary-nav">
           <li><a href="#home">Home</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#skills">Skills</a></li>
@@ -49,7 +67,7 @@
     <div class="container hero-grid">
       <div class="hero-copy">
 
-        <!-- LinkedIn pill ABOVE the eyebrow line -->
+        <!-- LinkedIn pill above eyebrow -->
         <a class="linkedin-hero"
            href="https://www.linkedin.com/in/suman-neupane-507786182?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
            target="_blank" rel="noopener" aria-label="Open LinkedIn profile">
@@ -68,9 +86,12 @@
           systems-admin style work (Intune/Autopilot, JAMF, AD, Exchange Online, VMware) and I’m keen
           to apply that in any environment—education, enterprise, or government.
         </p>
+
         <div class="cta-row">
-          <a class="btn" href="./cv.html" target="_blank" rel="noopener">Preview CV</a>
-          <a class="btn btn-ghost" href="./img/sumann.pdf" download>Download CV</a>
+          <!-- Preview opens PDF in a new tab -->
+          <a class="btn" href="img/sumann.pdf" target="_blank" rel="noopener">Preview CV</a>
+          <!-- Download saves file -->
+          <a class="btn btn-ghost" href="img/sumann.pdf" download>Download CV</a>
           <a class="btn btn-ghost" href="#contact">Contact</a>
         </div>
 
@@ -258,13 +279,6 @@
           <p><strong>Result</strong> reliable zero-touch provisioning with consistent policy state.</p>
           <div class="stack"><span>Intune</span><span>Autopilot</span><span>Config profiles</span><span>PowerShell</span></div>
         </article>
-
-        <article class="card reveal">
-          <h3>Buyer-seller mobile interface</h3>
-          <p class="meta">Melbourne Institute of Technology · Mar 2021 to Oct 2021</p>
-          <p>Built during my degree. B2B interface with payments — won “Second Best Project Award”.</p>
-          <div class="stack"><span>Python</span><span>PHP</span><span>MySQL</span></div>
-        </article>
       </div>
     </div>
   </section>
@@ -324,7 +338,7 @@
           <div class="cta-row">
             <a class="btn" href="mailto:sumanneupane008@gmail.com">Email me</a>
             <a class="btn btn-outline" href="tel:+61450481379">Call</a>
-            <a class="btn btn-ghost" href="./cv.html" target="_blank" rel="noopener">Preview CV</a>
+            <a class="btn btn-ghost" href="img/sumann.pdf" download>Resume</a>
           </div>
         </div>
 
@@ -335,36 +349,27 @@
               <li><span>Location</span><span>Melbourne, VIC</span></li>
               <li><span>Email</span><span><a href="mailto:sumanneupane008@gmail.com">sumanneupane008@gmail.com</a></span></li>
               <li><span>Phone</span><span><a href="tel:+61450481379">0450 481 379</a></span></li>
-              <li>
-                <span>Resume</span>
-                <span>
-                  <a href="./cv.html" target="_blank" rel="noopener">Preview</a> ·
-                  <a href="./img/sumann.pdf" download>Download PDF</a>
-                </span>
-              </li>
+              <li><span>Resume</span><span><a href="img/sumann.pdf" download>Download PDF</a></span></li>
             </ul>
           </div>
 
           <div class="card reveal">
             <h3>References</h3>
-            <details>
-              <summary>Pat Rossi · Director of IT · Melbourne Girls Grammar</summary>
-              <p>Phone 0402548886</p>
-            </details>
-            <details>
-              <summary>Hoach Nguyen · Systems and Network Engineer · Lowther Hall</summary>
-              <p>Phone 0430275495</p>
-            </details>
+            <ul class="bullets">
+              <li><strong>Director of IT</strong> — Melbourne Girls Grammar <span class="meta">· Contact details available on request</span></li>
+              <li><strong>Systems &amp; Network Engineer</strong> — Lowther Hall <span class="meta">· Contact details available on request</span></li>
+            </ul>
+            <p class="meta">Happy to share names and direct contact information after an initial screening call or upon request.</p>
           </div>
         </div>
       </div>
 
       <!-- Working FormSubmit form -->
       <form action="https://formsubmit.co/sumanneupane009@gmail.com" method="POST" class="card contact-form reveal">
-        <input type="hidden" name="_subject" value="New message from sumanneupane1.github.io">
+        <input type="hidden" name="_subject" value="New message from sumanneupane.com">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://sumanneupane1.github.io/#contact">
+        <input type="hidden" name="_next" value="https://sumanneupane.com/#contact">
 
         <h3>Send a message</h3>
         <label>
@@ -395,30 +400,34 @@
     </div>
   </footer>
 
-  <!-- Helpers for theme/nav/year; app.js runs after -->
+  <!-- Theme + nav bootstrap (works with your existing app.js too) -->
   <script>
-    // initial theme from storage or system (uses body.light-mode)
+    // initial theme from storage or system
     (function(){
-      const saved = localStorage.getItem('sn-theme'); // 'light' | 'dark'
+      const saved = localStorage.getItem('sn-theme');
       const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
       if (saved === 'light' || (!saved && prefersLight)) document.body.classList.add('light-mode');
       const btn = document.getElementById('themeToggle');
       if (document.body.classList.contains('light-mode')) { btn.textContent = '☀'; btn.setAttribute('aria-pressed','true'); }
     })();
 
-    // toggle theme
+    // toggle theme with animated veil (CSS already handles .theme-veil)
     document.getElementById('themeToggle')?.addEventListener('click', (e) => {
-      const isLight = document.body.classList.toggle('light-mode');
-      localStorage.setItem('sn-theme', isLight ? 'light' : 'dark');
-      e.currentTarget.textContent = isLight ? '☀' : '☾';
-      e.currentTarget.setAttribute('aria-pressed', isLight ? 'true' : 'false');
-
-      // optional: sweep effect hook (CSS will ignore if not present)
+      const toLight = !document.body.classList.contains('light-mode');
       const veil = document.createElement('div');
       veil.className = 'theme-veil';
-      veil.dataset.mode = isLight ? 'light' : 'dark';
+      veil.dataset.mode = toLight ? 'light' : 'dark';
+      const rect = e.currentTarget.getBoundingClientRect();
+      veil.style.setProperty('--x', `${rect.left + rect.width/2}px`);
+      veil.style.setProperty('--y', `${rect.top + rect.height/2 + window.scrollY}px`);
       document.body.appendChild(veil);
-      setTimeout(() => veil.remove(), 900);
+      requestAnimationFrame(() => {
+        document.body.classList.toggle('light-mode');
+        localStorage.setItem('sn-theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        e.currentTarget.textContent = document.body.classList.contains('light-mode') ? '☀' : '☾';
+        e.currentTarget.setAttribute('aria-pressed', document.body.classList.contains('light-mode') ? 'true' : 'false');
+        setTimeout(() => veil.remove(), 950);
+      });
     });
 
     // mobile nav
@@ -430,19 +439,9 @@
 
     // footer year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // scroll progress
-    const pb = document.querySelector('.progress-bar');
-    const onScroll = () => {
-      const h = document.documentElement;
-      const sc = h.scrollTop || document.body.scrollTop;
-      const max = h.scrollHeight - h.clientHeight;
-      pb.style.width = (sc / max) * 100 + '%';
-    };
-    document.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
   </script>
 
+  <!-- Your main JS (scroll reveals, counters, etc.) -->
   <script src="app.js"></script>
 </body>
 </html>
