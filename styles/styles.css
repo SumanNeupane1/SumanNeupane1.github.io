@@ -1,5 +1,6 @@
 /* =========================================================
-   Suman Neupane — Modern glassy UI + mobile polish
+   Suman Neupane — Ultra UI (modern, glassy, animated)
+   FINAL styles.css
    ========================================================= */
 
 /* ---------- Reset & base ---------- */
@@ -30,9 +31,9 @@ a{color:inherit;text-decoration:none}
   --text:#e9eef6;
   --muted:#aab3c7;
 
-  --accent:#c3ca6a;         /* olive neon */
-  --accent-2:#9ae6b4;       /* soft lime */
-  --accent-hot:#80a0ff;     /* blue glow */
+  --accent:#c3ca6a;        /* olive neon */
+  --accent-2:#9ae6b4;      /* soft lime */
+  --accent-hot:#80a0ff;    /* blue glow */
 
   --outline:rgba(255,255,255,.15);
   --track:rgba(255,255,255,.10);
@@ -43,35 +44,37 @@ a{color:inherit;text-decoration:none}
 
   --grad-accent:linear-gradient(135deg,var(--accent),var(--accent-hot));
   --grad-soft:
-    radial-gradient(600px 300px at 20% 10%, rgba(255,255,255,.06), transparent 60%),
-    radial-gradient(800px 400px at 85% 15%, rgba(128,160,255,.12), transparent 60%),
+    radial-gradient(600px 300px at 20% 10%,rgba(255,255,255,.06),transparent 60%),
+    radial-gradient(800px 400px at 85% 15%,rgba(128,160,255,.12),transparent 60%),
     linear-gradient(180deg,var(--bg),var(--bg2));
 }
 
-/* ---------- Light Mode (soft, not stark white) ---------- */
+/* ---------- Light Mode (class: body.light) ---------- */
 body.light{
-  --bg:#f4f6fb;
-  --bg2:#ecf0f7;
-  --panel:#ffffff;
+  /* Softer tinted light scheme (not stark white) */
+  --bg:#eef1f7;
+  --bg2:#e6eaf3;
+  --panel:#fdfdff;
   --card:#ffffff;
-  --elev:#f9fafc;
+  --elev:#f8faff;
 
-  --text:#0b1220;
-  --muted:#4a5568;
+  --text:#101523;
+  --muted:#5b6478;
 
-  --accent:#e0518f;       /* pink */
-  --accent-2:#ff8db5;
-  --accent-hot:#a78bfa;   /* soft violet */
+  --accent:#e0518f;        /* pink */
+  --accent-2:#ffa3c5;
+  --accent-hot:#9b8cf9;    /* soft violet */
 
-  --outline:#e2e6ef;
-  --track:#eef2f7;
+  --outline:#d3d8e6;
+  --track:#e9edf6;
 
-  --shadow:0 18px 40px rgba(8,19,53,.08);
+  --shadow:0 1px 0 rgba(20,25,50,.06),
+           0 10px 26px rgba(20,25,50,.08);
 
   --grad-accent:linear-gradient(135deg,var(--accent),var(--accent-hot));
   --grad-soft:
-    radial-gradient(700px 360px at 16% 12%, rgba(224,81,143,.10), transparent 60%),
-    radial-gradient(900px 420px at 86% 14%, rgba(128,160,255,.10), transparent 60%),
+    radial-gradient(900px 500px at 20% 10%, rgba(224,81,143,.08), transparent 60%),
+    radial-gradient(1200px 700px at 85% 15%, rgba(128,160,255,.10), transparent 60%),
     linear-gradient(180deg,var(--bg),var(--bg2));
 }
 
@@ -105,6 +108,11 @@ body.light .site-header{
 .brand{font-weight:800;letter-spacing:.4px;color:var(--text)}
 .nav{position:relative}
 .nav-links{display:flex;gap:1.1rem;align-items:center}
+
+/* Remove any “•” separators that may appear */
+.nav-links{font-size:0}
+.nav-links a{font-size:.95rem;letter-spacing:.1px}
+
 .nav-links a{
   padding:.5rem .75rem;border-radius:12px;color:var(--text);position:relative
 }
@@ -118,21 +126,14 @@ body.light .site-header{
 
 .nav-toggle{display:none;background:transparent;border:0;cursor:pointer}
 .nav-toggle-bar{display:block;width:22px;height:2px;background:var(--text);margin:4px 0;border-radius:2px}
-
-/* Remove legacy dot separators */
-.nav-links{gap:1.1rem;font-size:0}
-.nav-links a{font-size:.95rem;letter-spacing:.1px}
-.nav-links a::before{content:none!important}
-
 @media(max-width:860px){
   .nav-toggle{display:block}
   .nav-links{
     position:absolute;right:0;top:110%;
     background:color-mix(in oklab,var(--panel) 88%,transparent);
     border:1px solid var(--outline);border-radius:14px;padding:.6rem;
-    box-shadow:var(--shadow);
-    display:none;flex-direction:column;min-width:240px;
-    backdrop-filter:blur(12px) saturate(140%)
+    box-shadow:var(--shadow);display:none;flex-direction:column;min-width:240px;
+    backdrop-filter:blur(12px) saturate(140%);
   }
   .nav-links.open{display:flex}
 }
@@ -142,18 +143,15 @@ body.light .site-header{
   border:1px solid var(--outline);
   background:color-mix(in oklab,var(--card) 85%,transparent);
   color:var(--text);
-  border-radius:14px;width:38px;height:38px;
-  display:grid;place-items:center;
-  box-shadow:var(--shadow);
-  cursor:pointer;position:relative;overflow:hidden
+  border-radius:14px;width:38px;height:38px;display:grid;place-items:center;
+  box-shadow:var(--shadow);cursor:pointer;position:relative;overflow:hidden
 }
 .theme-btn:active{transform:translateY(-1px) scale(.98)}
 
 /* Scroll progress */
 .progress-bar{
   position:fixed;left:0;top:0;height:3px;width:0;
-  background:var(--grad-accent);
-  z-index:9999;
+  background:var(--grad-accent);z-index:9999;
   box-shadow:0 0 14px color-mix(in oklab,var(--accent) 70%,transparent)
 }
 
@@ -167,16 +165,12 @@ body.light .site-header{
 .section.alt::before{
   content:"";position:absolute;inset:-30%;
   background:
-    radial-gradient(600px 600px at 10% 10%, rgba(255,255,255,.06), transparent 60%),
-    radial-gradient(600px 600px at 90% 20%, rgba(128,160,255,.08), transparent 60%);
+    radial-gradient(600px 600px at 10% 10%,rgba(255,255,255,.06),transparent 60%),
+    radial-gradient(600px 600px at 90% 20%,rgba(128,160,255,.08),transparent 60%);
   filter:blur(20px) saturate(120%);
-  animation:drift 35s linear infinite alternate;
-  pointer-events:none
+  animation:drift 35s linear infinite alternate;pointer-events:none
 }
-@keyframes drift{
-  from{transform:translate3d(-3%,-2%,0) rotate(.2deg)}
-  to  {transform:translate3d( 3%, 2%,0) rotate(-.2deg)}
-}
+@keyframes drift{from{transform:translate3d(-3%,-2%,0) rotate(.2deg)}to{transform:translate3d(3%,2%,0) rotate(-.2deg)}}
 
 .two-col{display:grid;grid-template-columns:1fr;gap:2rem}
 @media(min-width:980px){.two-col{grid-template-columns:1.1fr .9fr}}
@@ -188,16 +182,20 @@ body.light .site-header{
   --b:1px;
   background:
     linear-gradient(var(--card),var(--card)) padding-box,
-    conic-gradient(from 140deg, transparent 0 40%, color-mix(in oklab,var(--accent) 60%,transparent) 60% 65%, transparent 65% 100%) border-box;
-  border:var(--b) solid transparent;
-  border-radius:var(--radius);
-  padding:1.25rem;
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(14px) saturate(130%)
+    conic-gradient(from 140deg,transparent 0 40%,color-mix(in oklab,var(--accent) 60%,transparent) 60% 65%,transparent 65% 100%) border-box;
+  border:var(--b) solid transparent;border-radius:var(--radius);padding:1.25rem;
+  box-shadow:var(--shadow);backdrop-filter:blur(14px) saturate(130%);
 }
 .card:hover{
   box-shadow:0 18px 50px rgba(0,0,0,.35),0 0 0 1px color-mix(in oklab,var(--accent) 25%,transparent);
   transform:translateY(-3px)
+}
+
+/* Light mode card/border clarity */
+body.light .card{
+  background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%) padding-box;
+  border:1px solid var(--outline);
+  box-shadow:0 1px 0 rgba(10,14,35,.04),0 10px 24px rgba(10,14,35,.06);
 }
 
 /* =========================================================
@@ -207,11 +205,9 @@ body.light .site-header{
 .hero::after{
   content:"";position:absolute;inset:-10%;
   background:
-    radial-gradient(800px 500px at 20% 10%, rgba(255,255,255,.06), transparent 60%),
-    radial-gradient(1000px 600px at 85% 15%, rgba(128,160,255,.12), transparent 60%);
-  filter:blur(18px);
-  animation:pano 45s linear infinite alternate;
-  pointer-events:none
+    radial-gradient(800px 500px at 20% 10%,rgba(255,255,255,.06),transparent 60%),
+    radial-gradient(1000px 600px at 85% 15%,rgba(128,160,255,.12),transparent 60%);
+  filter:blur(18px);animation:pano 45s linear infinite alternate;pointer-events:none
 }
 @keyframes pano{from{transform:translate3d(-2%,-1%,0)}to{transform:translate3d(2%,1%,0)}}
 
@@ -220,11 +216,10 @@ body.light .site-header{
 
 .eyebrow{color:var(--accent);font-weight:600;font-size:.95rem;margin:0 0 .55rem}
 
+/* LinkedIn pill */
 .linkedin-hero{
-  display:inline-flex;align-items:center;gap:.55rem;
-  background:#0A66C2;color:#fff;font-weight:800;
-  padding:.78rem 1.15rem;border-radius:999px;line-height:1;
-  box-shadow:0 10px 28px rgba(10,102,194,.35);margin:0 0 .7rem
+  display:inline-flex;align-items:center;gap:.55rem;background:#0A66C2;color:#fff;font-weight:800;
+  padding:.78rem 1.15rem;border-radius:999px;line-height:1;box-shadow:0 10px 28px rgba(10,102,194,.35);margin:0 0 .7rem
 }
 .linkedin-hero .li-ic{width:18px;height:18px;display:block}
 .linkedin-hero:hover{filter:brightness(1.05);transform:translateY(-1px)}
@@ -235,8 +230,7 @@ h1 span{background:var(--grad-accent);-webkit-background-clip:text;background-cl
 
 .cta-row{display:flex;gap:.8rem;flex-wrap:wrap}
 .btn{
-  display:inline-flex;align-items:center;gap:.55rem;
-  padding:.9rem 1.1rem;border-radius:14px;
+  display:inline-flex;align-items:center;gap:.55rem;padding:.9rem 1.1rem;border-radius:14px;
   border:1px solid var(--outline);
   background:linear-gradient(180deg,color-mix(in oklab,var(--card) 88%,transparent),color-mix(in oklab,var(--elev) 88%,transparent));
   box-shadow:var(--shadow);font-weight:700;cursor:pointer;backdrop-filter:blur(6px)
@@ -245,17 +239,36 @@ h1 span{background:var(--grad-accent);-webkit-background-clip:text;background-cl
 .btn-ghost{background:transparent}
 .btn-outline{background:transparent;border:1px dashed var(--outline)}
 
+/* Light mode button definition */
+body.light .btn{
+  background:linear-gradient(180deg,#ffffff,#f4f6fb);
+  border:1px solid var(--outline);
+  box-shadow:0 1px 0 rgba(10,14,35,.04),0 8px 18px rgba(10,14,35,.06)
+}
+/* The form's Send button should pop in light mode */
+body.light .contact-form .btn{
+  background:var(--grad-accent);
+  color:#fff;
+  border:0;
+  box-shadow:0 10px 22px rgba(224,81,143,.25)
+}
+
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.2rem}
 @media(max-width:720px){.stats{grid-template-columns:1fr}}
-.stat-num{font-weight:900;font-size:clamp(2.1rem,5vw,3.2rem);background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-num{
+  font-weight:900;font-size:clamp(2.1rem,5vw,3.2rem);
+  background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;color:transparent
+}
 .stat-label{color:var(--muted)}
 
 .hero-visual{position:relative;display:grid;place-items:center}
 .hero-image-wrap{
-  position:relative;border-radius:24px;overflow:hidden;
-  background:color-mix(in oklab,var(--card) 65%,transparent);
-  border:1px solid var(--outline);box-shadow:var(--shadow);
-  isolation:isolate
+  position:relative;border-radius:24px;overflow:hidden;background:color-mix(in oklab,var(--card) 65%,transparent);
+  border:1px solid var(--outline);box-shadow:var(--shadow);isolation:isolate
+}
+body.light .hero-image-wrap{
+  background:#ffffff;border:1px solid var(--outline);
+  box-shadow:0 12px 40px rgba(20,25,50,.10)
 }
 .hero-image{width:min(520px,92vw);height:auto;display:block;filter:grayscale(18%)}
 .hero-image:hover{filter:none}
@@ -285,7 +298,6 @@ body.light .orb-2{background:rgba(224,81,143,.14)}
   z-index:3
 }
 .timeline .card{position:relative;z-index:2;overflow:visible}
-
 .company-head{display:flex;gap:1rem;align-items:center;justify-content:space-between}
 .company-logo{width:120px;height:120px;object-fit:contain;opacity:1;filter:none}
 @media(max-width:560px){.company-logo{width:78px;height:78px}}
@@ -293,24 +305,29 @@ body.light .orb-2{background:rgba(224,81,143,.14)}
 .bullets{padding-left:1.15rem;margin:0}
 .bullets li{margin:.38rem 0}
 
+/* “Stack” chips/keywords (spacing fix) */
+.stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
+.stack span{
+  display:inline-flex;align-items:center;padding:.35rem .6rem;border-radius:999px;
+  font-size:.9rem;background:linear-gradient(180deg,color-mix(in oklab,var(--card) 90%,transparent),color-mix(in oklab,var(--elev) 90%,transparent));
+  border:1px solid var(--outline)
+}
+
 /* =========================================================
    SKILLS
    ========================================================= */
 .skills{display:grid;gap:1.25rem}
 .chip-group h4{margin:.25rem 0 .5rem}
 .chips{display:flex;flex-wrap:wrap;gap:.55rem}
-
 .chip{
-  display:inline-flex;align-items:center;gap:.35rem;
-  padding:.5rem .8rem;border-radius:999px;font-size:.92rem;
+  display:inline-flex;align-items:center;gap:.35rem;padding:.5rem .8rem;border-radius:999px;font-size:.92rem;
   background:linear-gradient(180deg,color-mix(in oklab,var(--card) 90%,transparent),color-mix(in oklab,var(--elev) 90%,transparent));
-  border:1px solid var(--outline);
-  box-shadow:inset 0 1px rgba(255,255,255,.08),0 8px 18px rgba(0,0,0,.14);
+  border:1px solid var(--outline);box-shadow:inset 0 1px rgba(255,255,255,.08),0 8px 18px rgba(0,0,0,.14);
   position:relative;overflow:hidden
 }
 .chip::after{
   content:"";position:absolute;inset:-30%;
-  background:radial-gradient(200px 80px at 0% 0%, rgba(255,255,255,.25), transparent 60%);
+  background:radial-gradient(200px 80px at 0% 0%,rgba(255,255,255,.25),transparent 60%);
   transform:translateX(-40%) rotate(8deg);transition:transform .45s ease
 }
 .chip:hover::after{transform:translateX(40%) rotate(8deg)}
@@ -324,89 +341,54 @@ body.light .orb-2{background:rgba(224,81,143,.14)}
 .bar-track{height:12px;border-radius:999px;background:var(--track);overflow:hidden;position:relative}
 .bar-fill{
   height:100%;width:0;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2)),
-             repeating-linear-gradient(45deg,rgba(255,255,255,.14) 0 8px,transparent 8px 16px);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.15);
-  border-radius:999px;animation:shine 2.4s linear infinite
+  background:
+    linear-gradient(90deg,var(--accent),var(--accent-2)),
+    repeating-linear-gradient(45deg,rgba(255,255,255,.14) 0 8px,transparent 8px 16px);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.15);border-radius:999px;
+  animation:shine 2.4s linear infinite
 }
 @keyframes shine{0%{background-position:0 0,0 0}100%{background-position:0 0,160px 0}}
 
 /* =========================================================
-   PROJECTS & KEYWORD STACKS
+   PROJECTS
    ========================================================= */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
 .card h3{margin:.2rem 0 .6rem}
 .card .meta{margin-bottom:.6rem;color:var(--muted)}
 
-/* >>> FIX: keyword chips spacing & style (Experience + Projects) */
-.stack{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.45rem;              /* spacing between keywords */
-  margin-top:.6rem;
-}
-.stack span{
-  display:inline-flex;
-  align-items:center;
-  padding:.36rem .64rem;
-  border-radius:999px;
-  font-size:.9rem;
-  line-height:1;
-  background:linear-gradient(
-    180deg,
-    color-mix(in oklab,var(--card) 90%,transparent),
-    color-mix(in oklab,var(--elev) 90%,transparent)
-  );
-  border:1px solid var(--outline);
-  color:var(--text);
-  white-space:nowrap;      /* keep multi-word items together */
-  box-shadow:inset 0 1px rgba(255,255,255,.08),0 6px 14px rgba(0,0,0,.12);
-}
-
 /* =========================================================
    SETUP (desk)
    ========================================================= */
 .setup-wrap{display:grid}
-.setup-img{
-  width:100%;height:auto;border-radius:22px;border:1px solid var(--outline);
-  box-shadow:var(--shadow)
-}
+.setup-img{width:100%;height:auto;border-radius:22px;border:1px solid var(--outline);box-shadow:var(--shadow)}
 
 /* =========================================================
    CONTACT
    ========================================================= */
 .contact-grid{display:grid;grid-template-columns:1fr;gap:1.2rem}
 @media(min-width:980px){.contact-grid{grid-template-columns:1.1fr .9fr}}
-
 .contact-banner{
   position:relative;overflow:hidden;border-radius:var(--radius);
   background:
-    radial-gradient(600px 240px at -10% 0%, rgba(255,255,255,.07), transparent 60%),
+    radial-gradient(600px 240px at -10% 0%,rgba(255,255,255,.07),transparent 60%),
     linear-gradient(180deg,color-mix(in oklab,var(--card) 85%,transparent),color-mix(in oklab,var(--panel) 82%,transparent));
-  border:1px solid var(--outline);
-  backdrop-filter:blur(12px) saturate(120%)
+  border:1px solid var(--outline);backdrop-filter:blur(12px) saturate(120%)
 }
 .contact-banner::after{
   content:"";position:absolute;right:-40px;bottom:-40px;width:300px;height:300px;border-radius:50%;
   background:conic-gradient(from 30deg,var(--accent),var(--accent-2),transparent 70%);
   filter:blur(40px);opacity:.22;pointer-events:none
 }
-
 .contact-cards{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
 @media(min-width:680px){.contact-cards{grid-template-columns:1fr 1fr}}
-
 .contact-list{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
-.contact-list li{
-  display:flex;justify-content:space-between;gap:1rem;
-  border-bottom:1px dashed var(--outline);padding:.4rem 0
-}
+.contact-list li{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px dashed var(--outline);padding:.4rem 0}
 .label{display:block;font-weight:700;margin-bottom:.25rem}
 
 /* Form controls */
 .contact-form input,.contact-form textarea{
-  width:100%;background:transparent;border:1px solid var(--outline);
-  border-radius:14px;padding:.8rem 1rem;color:var(--text);
-  transition:border-color .2s,box-shadow .2s,background-color .2s
+  width:100%;background:transparent;border:1px solid var(--outline);border-radius:14px;
+  padding:.8rem 1rem;color:var(--text);transition:border-color .2s,box-shadow .2s,background-color .2s
 }
 .contact-form input:focus,.contact-form textarea:focus{
   outline:none;border-color:var(--accent);
@@ -419,10 +401,7 @@ body.light .orb-2{background:rgba(224,81,143,.14)}
 /* =========================================================
    FOOTER
    ========================================================= */
-.site-footer{
-  padding:2.4rem 0;background:var(--panel);color:var(--muted);
-  text-align:center;border-top:1px solid var(--outline)
-}
+.site-footer{padding:2.4rem 0;background:var(--panel);color:var(--muted);text-align:center;border-top:1px solid var(--outline)}
 
 /* =========================================================
    REVEAL + PROGRESS
@@ -431,14 +410,14 @@ body.light .orb-2{background:rgba(224,81,143,.14)}
 .reveal.in{opacity:1;transform:none}
 
 /* =========================================================
-   THEME VEIL (optional effect if you add it via JS)
+   THEME VEIL (animated color sweep on toggle)
    ========================================================= */
 .theme-veil{
   position:fixed;inset:0;pointer-events:none;z-index:9998;
   --x:50vw;--y:50vh;
   background:
-    radial-gradient(1400px 1000px at var(--x) var(--y), rgba(255,255,255,.07) 0%, transparent 60%),
-    radial-gradient(1200px 900px at var(--x) var(--y), var(--veil-1) 0%, var(--veil-2) 36%, transparent 62%);
+    radial-gradient(1400px 1000px at var(--x) var(--y),rgba(255,255,255,.07) 0%,transparent 60%),
+    radial-gradient(1200px 900px at var(--x) var(--y),var(--veil-1) 0%,var(--veil-2) 36%,transparent 62%);
   mix-blend-mode:screen;filter:saturate(135%) contrast(115%);
   animation:veilZoom .95s ease-out forwards
 }
@@ -447,12 +426,12 @@ body.light .orb-2{background:rgba(224,81,143,.14)}
 @keyframes veilZoom{from{opacity:.6;transform:scale(.86)}55%{opacity:.38;transform:scale(1.06)}to{opacity:0;transform:scale(1.24)}}
 
 /* =========================================================
-   UTILITIES
+   UTILITIES / TARGET OFFSET
    ========================================================= */
 :target{scroll-margin-top:92px}
 
 /* =========================================================
-   MOBILE POLISH (timeline, spacing)
+   MOBILE POLISH
    ========================================================= */
 @media(max-width:820px){
   .section{padding:4.2rem 0}
@@ -469,24 +448,15 @@ body.light .orb-2{background:rgba(224,81,143,.14)}
 
   .timeline{padding-left:0;margin-left:0}
   .timeline::before{display:none}
-
   .t-item{margin:0 0 1.1rem;padding-left:0;isolation:isolate}
-  .t-dot{
-    left:12px;top:18px;width:10px;height:10px;
-    box-shadow:0 0 0 4px color-mix(in oklab,var(--accent) 28%,transparent)
-  }
-  .timeline .card{
-    padding:1rem 1rem 1rem 1.1rem;
-    border-left:4px solid var(--accent);
-    border-radius:16px;overflow:visible
-  }
+  .t-dot{left:12px;top:18px;width:10px;height:10px;box-shadow:0 0 0 4px color-mix(in oklab,var(--accent) 28%,transparent);z-index:3}
+  .timeline .card{padding:1rem 1rem 1rem 1.1rem;border-left:4px solid var(--accent);border-radius:16px;overflow:visible}
 
   .company-head{align-items:flex-start;gap:.75rem}
   .company-logo{width:82px;height:82px}
   .meta{font-size:.92rem}
   .bullets{padding-left:1rem}
   .bullets li{margin:.32rem 0}
-
   #experience .section-title{margin-bottom:.35rem}
 }
 @media(max-width:380px){
