@@ -21,11 +21,6 @@
     <div class="container nav-row">
       <div class="nav-left">
         <a class="brand" href="#home">SN</a>
-        <!-- Prominent LinkedIn next to brand -->
-        <a class="header-linkedin" href="https://www.linkedin.com/in/suman-neupane-507786182?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener" aria-label="Open LinkedIn profile">
-          <svg viewBox="0 0 24 24" class="li-ic" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zm7.5 0h3.8v2h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.15V23h-4v-6.5c0-1.55-.03-3.55-2.17-3.55-2.18 0-2.51 1.7-2.51 3.43V23h-3.8V8.5z"/></svg>
-          <span>LinkedIn</span>
-        </a>
       </div>
 
       <nav class="nav">
@@ -42,6 +37,14 @@
           <li><a href="#setup">Setup</a></li>
           <li><a href="#education">Education</a></li>
           <li><a href="#contact">Contact</a></li>
+
+          <!-- Prominent LinkedIn in top line -->
+          <li class="nav-cta">
+            <a class="header-linkedin" href="https://www.linkedin.com/in/suman-neupane-507786182?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener" aria-label="Open LinkedIn profile">
+              <svg viewBox="0 0 24 24" class="li-ic" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zm7.5 0h3.8v2h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.15V23h-4v-6.5c0-1.55-.03-3.55-2.17-3.55-2.18 0-2.51 1.7-2.51 3.43V23h-3.8V8.5z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </li>
         </ul>
       </nav>
 
@@ -63,7 +66,6 @@
           <a class="btn btn-ghost" href="#contact">Contact</a>
         </div>
 
-        <!-- Stats -->
         <div class="stats">
           <div class="stat card reveal">
             <div class="stat-num" data-count="2.5" data-decimals="1" data-suffix="+">0</div>
@@ -99,7 +101,6 @@
       </div>
 
       <ol class="timeline">
-        <!-- Lowther Hall -->
         <li class="t-item reveal">
           <div class="t-dot"></div>
           <article class="t-card card">
@@ -124,7 +125,6 @@
           </article>
         </li>
 
-        <!-- Johns Lyng Group -->
         <li class="t-item reveal">
           <div class="t-dot"></div>
           <article class="t-card card">
@@ -269,7 +269,6 @@
         <p class="section-lead">A neat workspace for tinkering and learning.</p>
       </div>
       <div class="setup-wrap reveal">
-        <!-- Minimal: image only -->
         <img class="setup-img" src="img/setup1.jpg" alt="Desk setup" />
       </div>
     </div>
@@ -346,7 +345,13 @@
         </div>
       </div>
 
-      <form action="https://formspree.io/f/yourid" method="POST" class="card contact-form reveal">
+      <!-- CONTACT FORM
+           If you use Formspree, paste your endpoint into data-formspree below, e.g.:
+           data-formspree="https://formspree.io/f/abcdwxyz"
+           Without it, the form falls back to mailto: and opens the user's mail client. -->
+      <form id="contactForm" class="card contact-form reveal"
+            data-formspree=""
+            data-fallback-mailto="sumanneupane008@gmail.com">
         <h3>Send a message</h3>
         <label>
           <span class="label">Your name</span>
@@ -365,6 +370,7 @@
           <textarea rows="6" name="message" required></textarea>
         </label>
         <button class="btn" type="submit">Send</button>
+        <p class="form-status" aria-live="polite"></p>
       </form>
     </div>
   </section>
@@ -374,6 +380,33 @@
       <p>© <span id="year"></span> Suman Neupane</p>
     </div>
   </footer>
+
+  <!-- Lightweight form handler with Formspree + mailto fallback -->
+  <script>
+  (function(){
+    const f = document.getElementById('contactForm');
+    if(!f) return;
+    const status = f.querySelector('.form-status');
+    const fs = f.dataset.formspree?.trim();
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(f);
+      if (fs) {
+        try {
+          const res = await fetch(fs, { method:'POST', body: data, headers: { 'Accept':'application/json' }});
+          if (res.ok) { status.textContent = 'Thanks! Your message was sent.'; f.reset(); return; }
+        } catch(e){}
+      }
+      // Fallback to mailto
+      const to = f.dataset.fallbackMailto || 'sumanneupane008@gmail.com';
+      const subject = encodeURIComponent(data.get('subject') || 'Website enquiry');
+      const body = encodeURIComponent(
+        `Name: ${data.get('name')}\nEmail: ${data.get('email')}\n\n${data.get('message')}`
+      );
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    });
+  })();
+  </script>
 
   <script src="app.js"></script>
 </body>
