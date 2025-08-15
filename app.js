@@ -1,58 +1,80 @@
-/* ========== Year in footer ========== */
-document.getElementById('year').textContent = new Date().getFullYear();
+/* =========================================================
+   Helpers
+   ========================================================= */
+const qs  = (s, r = document) => r.querySelector(s);
+const qsa = (s, r = document) => Array.from(r.querySelectorAll(s));
 
-/* ========== Mobile nav ========== */
-const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-navToggle?.addEventListener('click', (e) => {
-  const open = navLinks.classList.toggle('open');
-  e.currentTarget.setAttribute('aria-expanded', open ? 'true' : 'false');
-});
-navLinks?.querySelectorAll('a').forEach(a =>
-  a.addEventListener('click', () => navLinks.classList.remove('open'))
-);
-
-/* ========== Theme toggle with sweep ========== */
+/* =========================================================
+   Theme (uses body.light)
+   ========================================================= */
 const THEME_KEY = 'sn-theme';
-const btn = document.getElementById('themeToggle');
+const themeBtn  = qs('#themeToggle');
 
 function applyTheme(mode) {
   document.body.classList.toggle('light', mode === 'light');
-  btn.textContent = mode === 'light' ? '☀' : '☾';
-  btn.setAttribute('aria-pressed', mode === 'light' ? 'true' : 'false');
+  if (themeBtn) {
+    themeBtn.textContent = mode === 'light' ? '☀' : '☾';
+    themeBtn.setAttribute('aria-pressed', mode === 'light' ? 'true' : 'false');
+  }
 }
+
 (function initTheme(){
   const saved = localStorage.getItem(THEME_KEY);
   const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
   applyTheme(saved ?? (prefersLight ? 'light' : 'dark'));
+
+  // If user hasn’t chosen a theme, follow OS changes live
+  if (!saved) {
+    const mql = window.matchMedia('(prefers-color-scheme: light)');
+    mql.addEventListener('change', e => applyTheme(e.matches ? 'light' : 'dark'));
+  }
 })();
-btn?.addEventListener('click', (e) => {
+
+themeBtn?.addEventListener('click', (e) => {
   const to = document.body.classList.contains('light') ? 'dark' : 'light';
   localStorage.setItem(THEME_KEY, to);
   applyTheme(to);
-
-  // sweep veil
-  const r = e.currentTarget.getBoundingClientRect();
-  const veil = document.createElement('div');
-  veil.className = 'theme-veil';
-  veil.dataset.mode = to;
-  veil.style.setProperty('--x', `${r.left + r.width/2}px`);
-  veil.style.setProperty('--y', `${r.top + r.height/2}px`);
-  document.body.appendChild(veil);
-  veil.addEventListener('animationend', () => veil.remove(), { once:true });
 });
 
-/* ========== Scroll progress ========== */
-const prog = document.querySelector('.progress-bar');
+/* =========================================================
+   Mobile nav
+   ========================================================= */
+const navToggle = qs('.nav-toggle');
+const navLinks  = qs('.nav-links');
+
+navToggle?.addEventListener('click', (e) => {
+  const open = navLinks.classList.toggle('open');
+  e.currentTarget.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+
+navLinks?.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => navLinks.classList.remove('open'))
+);
+
+// Close menu if you click outside it (mobile)
+document.addEventListener('click', (ev) => {
+  if (!navLinks || !navToggle) return;
+  const clickedToggle = navToggle.contains(ev.target);
+  const clickedMenu   = navLinks.contains(ev.target);
+  if (!clickedToggle && !clickedMenu) navLinks.classList.remove('open');
+});
+
+/* =========================================================
+   Scroll progress
+   ========================================================= */
+const prog = qs('.progress-bar');
 function updateProgress(){
+  if (!prog) return;
   const h = document.documentElement;
-  const sc = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-  prog.style.width = `${sc}%`;
+  const sc = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+  prog.style.width = `${Math.max(0, Math.min(sc, 100))}%`;
 }
 updateProgress();
-addEventListener('scroll', updateProgress, { passive:true });
+addEventListener('scroll', updateProgress, { passive: true });
 
-/* ========== Reveal on scroll ========== */
+/* =========================================================
+   Reveal-on-scroll
+   ========================================================= */
 const revealIO = new IntersectionObserver((entries) => {
   entries.forEach(ent => {
     if (ent.isIntersecting) {
@@ -61,14 +83,21 @@ const revealIO = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
-document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
 
-/* ========== Stat counters ========== */
+qsa('.reveal').forEach(el => revealIO.observe(el));
+
+/* =========================================================
+   Stat counters
+   ========================================================= */
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-function animateNumber(el, to, {duration=1000, decimals=0, suffix='' }={}){
-  if (reduceMotion) { el.textContent = (+to).toFixed(decimals) + suffix; return; }
+
+function animateNumber(el, to, { duration = 1100, decimals = 0, suffix = '' } = {}) {
+  if (reduceMotion) {
+    el.textContent = Number(to).toFixed(decimals) + suffix;
+    return;
+  }
   const start = performance.now();
-  function frame(t){
+  function frame(t) {
     const p = Math.min((t - start) / duration, 1);
     const val = to * p;
     el.textContent = val.toFixed(decimals) + suffix;
@@ -76,6 +105,7 @@ function animateNumber(el, to, {duration=1000, decimals=0, suffix='' }={}){
   }
   requestAnimationFrame(frame);
 }
+
 const statIO = new IntersectionObserver((entries) => {
   entries.forEach(ent => {
     if (ent.isIntersecting) {
@@ -88,34 +118,46 @@ const statIO = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.5 });
-document.querySelectorAll('.stat-num').forEach(el => statIO.observe(el));
 
-/* ========== Skill bars ========== */
+qsa('.stat-num').forEach(el => statIO.observe(el));
+
+/* =========================================================
+   Skill bars
+   ========================================================= */
 const barIO = new IntersectionObserver((entries) => {
   entries.forEach(ent => {
-    if (ent.isIntersecting) {
-      const bar = ent.target;
-      const valEl = bar.querySelector('.bar-val');
-      const fill = bar.querySelector('.bar-fill');
-      const pct = parseFloat(valEl.dataset.val || '0');
+    if (!ent.isIntersecting) return;
 
-      if (reduceMotion) {
-        fill.style.width = pct + '%';
-        valEl.textContent = Math.round(pct) + '%';
-      } else {
-        const start = performance.now();
-        const dur = 900;
-        function tick(t){
-          const p = Math.min((t - start) / dur, 1);
-          const now = pct * p;
-          fill.style.width = now + '%';
-          valEl.textContent = Math.round(now) + '%';
-          if (p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      }
-      barIO.unobserve(bar);
+    const bar = ent.target;
+    const valEl = bar.querySelector('.bar-val');
+    const fill  = bar.querySelector('.bar-fill');
+    if (!valEl || !fill) return;
+
+    const pct = parseFloat(valEl.dataset.val || '0');
+
+    if (reduceMotion) {
+      fill.style.width = pct + '%';
+      valEl.textContent = Math.round(pct) + '%';
+    } else {
+      const start = performance.now();
+      const dur = 900;
+      (function tick(t){
+        const p = Math.min((t - start) / dur, 1);
+        const now = pct * p;
+        fill.style.width = now + '%';
+        valEl.textContent = Math.round(now) + '%';
+        if (p < 1) requestAnimationFrame(tick);
+      })(performance.now());
     }
+
+    barIO.unobserve(bar);
   });
 }, { threshold: 0.4 });
-document.querySelectorAll('.bar').forEach(b => barIO.observe(b));
+
+qsa('.bar').forEach(b => barIO.observe(b));
+
+/* =========================================================
+   Footer year
+   ========================================================= */
+const yearSpan = qs('#year');
+if (yearSpan) yearSpan.textContent = new Date().getFullYear();
