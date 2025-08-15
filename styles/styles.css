@@ -151,6 +151,15 @@ body.light-mode .site-header{
   box-shadow: 0 0 14px color-mix(in oklab,var(--accent) 70%, transparent);
 }
 
+/* === NAV cleanup: remove old dot separators === */
+.nav-links{ gap:1.1rem; font-size:0; }        /* hides raw "•" between links */
+.nav-links a{ font-size:.95rem; letter-spacing:.1px; }
+.nav-links a::before{ content:none !important; }
+@media (max-width:860px){
+  .nav-links{ font-size:0; }
+  .nav-links a{ font-size:1rem; }
+}
+
 /* =========================================================
    SECTIONS
    ========================================================= */
