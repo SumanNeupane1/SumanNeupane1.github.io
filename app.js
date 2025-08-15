@@ -1,125 +1,126 @@
-// Year in footer
-document.getElementById('year').textContent = new Date().getFullYear();
+/* Suman Neupane - site interactions (final) */
+(() => {
+  // ---------- THEME ----------
+  const body = document.body;
+  const btn = document.getElementById('themeToggle') || document.querySelector('.theme-btn');
 
-// Mobile nav
-const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-if (navToggle) {
-  navToggle.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  }));
-}
-
-// Theme toggle
-const themeBtn = document.querySelector('.theme-btn');
-if (themeBtn) {
-  const saved = localStorage.getItem('theme');
-  if (saved === 'light') document.body.classList.add('light');
-  themeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('light');
-    localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
-    themeBtn.textContent = document.body.classList.contains('light') ? '☀' : '☾';
-  });
-  themeBtn.textContent = document.body.classList.contains('light') ? '☀' : '☾';
-}
-
-// Reveal on scroll
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('in');
-      io.unobserve(e.target);
+  const applyTheme = (mode) => {
+    if (mode === 'light') {
+      body.classList.add('light');
+      document.documentElement.setAttribute('data-theme', 'light');
+      if (btn) { btn.textContent = '☀'; btn.setAttribute('aria-pressed', 'true'); }
+    } else {
+      body.classList.remove('light');
+      document.documentElement.setAttribute('data-theme', 'dark');
+      if (btn) { btn.textContent = '☾'; btn.setAttribute('aria-pressed', 'false'); }
     }
-  });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  };
 
-// Stagger chips
-document.querySelectorAll('[data-stagger]').forEach(group => {
-  [...group.children].forEach((chip, i) => chip.style.setProperty('--d', `${i * 0.06}s`));
-});
+  const saved = localStorage.getItem('sn-theme');
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  applyTheme(saved || (prefersLight ? 'light' : 'dark'));
 
-// Bars animate when visible
-const barObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.querySelectorAll('.bar').forEach(bar => {
-        const val = parseInt(bar.querySelector('.bar-val').dataset.val, 10);
-        const fill = bar.querySelector('.bar-fill');
-        const label = bar.querySelector('.bar-val');
-        animateBar(fill, label, val);
-      });
-      barObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.4 });
-const barsBlock = document.querySelector('.bars');
-if (barsBlock) barObserver.observe(barsBlock);
-
-function animateBar(fill, label, target) {
-  const start = performance.now();
-  const dur = 1200;
-  function step(t) {
-    const p = Math.min((t - start) / dur, 1);
-    const eased = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p;
-    const val = Math.floor(target * eased);
-    fill.style.width = `${val}%`;
-    label.textContent = `${val}%`;
-    if (p < 1) requestAnimationFrame(step);
-    else label.textContent = `${target}%`;
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const mode = body.classList.contains('light') ? 'dark' : 'light';
+      applyTheme(mode);
+      localStorage.setItem('sn-theme', mode);
+    });
   }
-  requestAnimationFrame(step);
-}
 
-// Counters in stats
-const countObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const num = e.target;
-      animateCount(num, parseInt(num.dataset.count || '0', 10));
-      countObserver.unobserve(num);
-    }
-  });
-}, { threshold: 0.6 });
-document.querySelectorAll('.stat-num[data-count]').forEach(el => countObserver.observe(el));
-
-function animateCount(el, target) {
-  const start = performance.now();
-  const dur = 1200;
-  function step(t) {
-    const p = Math.min((t - start) / dur, 1);
-    const eased = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p;
-    el.textContent = String(Math.floor(target * (0.2 + 0.8 * eased)));
-    if (p < 1) requestAnimationFrame(step);
-    else el.textContent = String(target);
+  // ---------- NAV TOGGLE ----------
+  const navToggle = document.querySelector('.nav-toggle');
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      document.querySelector('.nav-links')?.classList.toggle('open');
+      const open = document.querySelector('.nav-links')?.classList.contains('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
   }
-  requestAnimationFrame(step);
-}
 
-// Scroll progress
-const bar = document.querySelector('.progress-bar');
-function updateProgress() {
-  const h = document.documentElement;
-  const p = h.scrollTop / (h.scrollHeight - h.clientHeight);
-  bar.style.width = `${p * 100}%`;
-}
-window.addEventListener('scroll', updateProgress, { passive: true });
-updateProgress();
+  // ---------- PROGRESS BAR ----------
+  const pb = document.querySelector('.progress-bar');
+  const onScroll = () => {
+    if (!pb) return;
+    const scrolled = window.scrollY;
+    const max = document.body.scrollHeight - window.innerHeight;
+    pb.style.width = Math.max(0, Math.min(100, (scrolled / max) * 100)) + '%';
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-// Smooth scroll for same-page links
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href').slice(1);
-    if (!id) return;
-    const el = document.getElementById(id);
-    if (el) {
-      e.preventDefault();
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  // ---------- REVEAL ON VIEW ----------
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        revealIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.reveal').forEach((el) => revealIO.observe(el));
+
+  // ---------- CHIPS STAGGER ----------
+  document.querySelectorAll('[data-stagger] .chip').forEach((chip, i) => {
+    chip.style.setProperty('--d', `${i * 0.05}s`);
   });
-});
+
+  // ---------- SKILL BARS ----------
+  const barIO = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      const bar = en.target;
+      const fill = bar.querySelector('.bar-fill');
+      const valEl = bar.querySelector('.bar-val');
+      const val = parseInt(valEl?.dataset.val || '0', 10);
+
+      // animate fill
+      if (fill) fill.style.width = val + '%';
+
+      // animate number
+      if (valEl) {
+        let n = 0;
+        const step = () => {
+          n += (val - n) * 0.12;
+          if (n + 0.5 < val) {
+            valEl.textContent = Math.round(n) + '%';
+            requestAnimationFrame(step);
+          } else {
+            valEl.textContent = val + '%';
+          }
+        };
+        requestAnimationFrame(step);
+      }
+      barIO.unobserve(bar);
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.bar').forEach((b) => barIO.observe(b));
+
+  // ---------- STAT COUNTERS ----------
+  const numIO = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      const target = parseFloat(el.dataset.count || '0');
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const suffix = el.dataset.suffix || '';
+      let t0 = null;
+      const dur = 1200;
+
+      const tick = (ts) => {
+        if (!t0) t0 = ts;
+        const p = Math.min(1, (ts - t0) / dur);
+        const v = target * p;
+        el.textContent = v.toFixed(decimals) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      numIO.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.stat-num').forEach((n) => numIO.observe(n));
+
+  // ---------- FOOTER YEAR ----------
+  const y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+})();
