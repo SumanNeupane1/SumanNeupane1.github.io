@@ -81,7 +81,7 @@ body, .site-header, .nav-links a, .theme-btn,
   border-bottom:1px solid var(--outline);
 }
 
-/* Glass for both themes */
+/* Glass feel for both themes */
 .glass{
   background:
     linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0)) 0 0/100% 100%,
@@ -92,10 +92,6 @@ body.light .glass{
     linear-gradient(180deg, rgba(255,255,255,.4), rgba(255,255,255,.2)) 0 0/100% 100%,
     rgba(255,255,255,.65);
   box-shadow:0 8px 24px rgba(2,6,23,.06);
-}
-
-.site-header.scrolled{
-  background: color-mix(in oklab, var(--panel) 88%, transparent);
 }
 
 .nav-row{display:flex;align-items:center;justify-content:space-between;padding:.85rem 0}
@@ -143,7 +139,11 @@ body.light .glass{
 }
 
 /* Progress bar */
-.progress-bar{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:9999}
+.progress-bar{
+  position:fixed;left:0;top:0;height:3px;width:0;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  z-index:9999
+}
 
 /* ===================================================================
    Sections + dividers
@@ -211,9 +211,20 @@ h1 span{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit
 .stat-label{color:var(--muted)}
 
 .hero-visual{position:relative;display:grid;place-items:center}
-.hero-image-wrap{position:relative;border-radius:24px;overflow:hidden;background:color-mix(in oklab,var(--card) 65%, transparent);border:1px solid var(--outline);box-shadow:var(--shadow);isolation:isolate}
-.hero-image{width:min(520px,92vw);height:auto;display:block;filter:grayscale(18%)}
-.hero-image:hover{filter:none}
+.hero-image-wrap{
+  position:relative;border-radius:24px;overflow:hidden;
+  background:color-mix(in oklab,var(--card) 65%, transparent);
+  border:1px solid var(--outline);box-shadow:var(--shadow);isolation:isolate
+}
+/* 20% smaller + B&W by default; color on hover */
+.hero-image{
+  width:min(416px, 80vw);   /* ~20% smaller than 520px */
+  height:auto;display:block;
+  filter:grayscale(100%);
+  transition:filter .35s ease, transform .35s ease;
+}
+.hero-image-wrap:hover .hero-image{filter:none; transform:scale(1.02)}
+
 .orb{position:absolute;border-radius:999px;filter:blur(30px);opacity:.55;pointer-events:none}
 .orb-1{width:300px;height:300px;background:rgba(195,202,106,.55);top:6%;right:10%;animation:float 12s ease-in-out infinite alternate}
 .orb-2{width:220px;height:220px;background:rgba(128,160,255,.35);bottom:8%;left:8%;animation:float 14s ease-in-out infinite alternate}
@@ -230,7 +241,14 @@ body.light .orb-2{background:rgba(224,81,143,.14)}
   background:linear-gradient(180deg,var(--accent) 0%, transparent 60%);opacity:.75
 }
 .t-item{position:relative;margin:0 0 1.7rem}
-.t-dot{position:absolute;left:-.1rem;top:.9rem;width:.92rem;height:.92rem;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 0 0 7px color-mix(in oklab,var(--accent) 35%, transparent)}
+.t-dot{
+  position:absolute;left:-.1rem;top:.9rem;width:.92rem;height:.92rem;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 0 7px color-mix(in oklab,var(--accent) 35%, transparent);
+  z-index:5;             /* make sure it sits above the card */
+}
+.timeline .card{position:relative;z-index:2;overflow:visible} /* ensure dot isn't hidden */
+
 .company-head{display:flex;gap:1rem;align-items:center;justify-content:space-between}
 .company-logo{width:120px;height:120px;object-fit:contain}
 @media(max-width:560px){.company-logo{width:78px;height:78px}}
@@ -238,12 +256,12 @@ body.light .orb-2{background:rgba(224,81,143,.14)}
 .bullets{padding-left:1.15rem;margin:0}
 .bullets li{margin:.38rem 0}
 
-/* Stack/keywords fix */
+/* Stack/keywords */
 .stack{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
 .stack span{display:inline-flex;padding:.35rem .65rem;border:1px solid var(--outline);border-radius:999px;background:linear-gradient(180deg, color-mix(in oklab,var(--card) 92%, transparent), color-mix(in oklab,var(--elev) 92%, transparent));font-size:.9rem}
 
 /* ===================================================================
-   Chips/Bars
+   Skills: chips & bars
    =================================================================== */
 .skills{display:grid;gap:1.25rem}
 .chip-group h4{margin:.25rem 0 .5rem}
@@ -258,7 +276,26 @@ body.light .orb-2{background:rgba(224,81,143,.14)}
 .bar-track{height:12px;border-radius:999px;background:var(--track);overflow:hidden}
 .bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:999px}
 
-/* Setup / Contact */
+/* ===================================================================
+   Projects: real spacing + nicer hover
+   =================================================================== */
+.cards{
+  display:grid;
+  grid-auto-rows: auto;
+  gap:1.2rem;                /* space between project cards */
+}
+.cards .card{
+  transition:transform .25s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.cards .card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 50px rgba(0,0,0,.35),
+             0 0 0 1px color-mix(in oklab,var(--accent) 25%, transparent);
+}
+
+/* ===================================================================
+   Setup / Contact
+   =================================================================== */
 .setup-img{width:100%;height:auto;border-radius:22px;border:1px solid var(--outline);box-shadow:var(--shadow)}
 
 .contact-grid{display:grid;grid-template-columns:1fr;gap:1.2rem}
