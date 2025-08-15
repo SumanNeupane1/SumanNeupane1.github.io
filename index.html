@@ -2,33 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Suman Neupane | IT Support and Operations</title>
   <meta name="description" content="Level 2 IT Support with strengths in endpoint management, identity, messaging and infrastructure. Intune, Autopilot, JAMF, AD, Exchange Online, VMware." />
+
+  <!-- Social preview (no portrait) -->
+  <meta property="og:title" content="Suman Neupane · IT Support • Systems • Endpoints" />
+  <meta property="og:description" content="Intune • Autopilot • JAMF • AD • Exchange Online • VMware" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="img/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="img/og-card.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
   <!-- Progress bar -->
   <div class="progress-bar" aria-hidden="true"></div>
 
-  <!-- Header -->
-  <header class="site-header">
+  <!-- Header (glassy in both themes) -->
+  <header class="site-header glass" id="siteHeader">
     <div class="container nav-row">
-      <div class="nav-left">
-        <a class="brand" href="#home">SN</a>
-      </div>
+      <a class="brand" href="#home">SN</a>
 
-      <nav class="nav">
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
-        </button>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="siteNav">
         <ul class="nav-links">
           <li><a href="#home">Home</a></li>
           <li><a href="#experience">Experience</a></li>
@@ -38,9 +43,9 @@
           <li><a href="#education">Education</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-      </nav>
 
-      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme" aria-pressed="false">☾</button>
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle theme" aria-pressed="false">☾</button>
+      </nav>
     </div>
   </header>
 
@@ -48,11 +53,10 @@
   <section id="home" class="section hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-
-        <!-- LinkedIn pill ABOVE the eyebrow line -->
+        <!-- LinkedIn pill above eyebrow -->
         <a class="linkedin-hero"
-           href="https://www.linkedin.com/in/suman-neupane-507786182?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
-           target="_blank" rel="noopener" aria-label="Open LinkedIn profile">
+           href="https://www.linkedin.com/in/suman-neupane-507786182"
+           target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" class="li-ic" aria-hidden="true">
             <path fill="currentColor" d="M4.98 3.5A2.48 2.48 0 1 1 0 3.5a2.48 2.48 0 0 1 4.98 0zM.5 8.5h4V23h-4V8.5zm7.5 0h3.8v2h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.15V23h-4v-6.5c0-1.55-.03-3.55-2.17-3.55-2.18 0-2.51 1.7-2.51 3.43V23H8V8.5z"/>
           </svg>
@@ -68,10 +72,13 @@
           systems-admin style work (Intune/Autopilot, JAMF, AD, Exchange Online, VMware) and I’m keen
           to apply that in any environment—education, enterprise, or government.
         </p>
+
         <div class="cta-row">
-          <a class="btn" href="./cv.html" target="_blank" rel="noopener">Preview CV</a>
-          <a class="btn btn-ghost" href="./img/sumann.pdf" download>Download CV</a>
-          <a class="btn btn-ghost" href="#contact">Contact</a>
+          <!-- Preview opens in a tab -->
+          <a class="btn" href="cv.html" target="_blank" rel="noopener">Preview CV</a>
+          <!-- Download pdf in /img -->
+          <a class="btn btn-ghost" href="img/sumann.pdf" download>Download CV</a>
+          <a class="btn btn-outline" href="#contact">Contact</a>
         </div>
 
         <div class="stats">
@@ -98,6 +105,9 @@
         </div>
       </div>
     </div>
+
+    <!-- soft divider to next section -->
+    <div class="section-divider"></div>
   </section>
 
   <!-- Experience -->
@@ -128,7 +138,8 @@
               <li>Executive-level IT service reporting for planning and risk.</li>
             </ul>
             <div class="stack">
-              <span>AD</span><span>Azure AD</span><span>Intune</span><span>Autopilot</span><span>JAMF</span><span>Exchange Online</span><span>ServiceDesk Plus</span>
+              <span>AD</span><span>Azure AD</span><span>Intune</span><span>Autopilot</span>
+              <span>JAMF</span><span>Exchange Online</span><span>ServiceDesk Plus</span>
             </div>
           </article>
         </li>
@@ -149,12 +160,15 @@
               <li>Usage/inventory/procurement reporting for management.</li>
             </ul>
             <div class="stack">
-              <span>M365 Admin</span><span>AD</span><span>VMware</span><span>Azure</span><span>Exchange</span><span>FortiClient</span><span>Trend Micro</span>
+              <span>M365 Admin</span><span>AD</span><span>VMware</span><span>Azure</span>
+              <span>Exchange</span><span>FortiClient</span><span>Trend Micro</span>
             </div>
           </article>
         </li>
       </ol>
     </div>
+
+    <div class="section-divider"></div>
   </section>
 
   <!-- Skills -->
@@ -221,9 +235,10 @@
         </div>
       </div>
     </div>
+    <div class="section-divider"></div>
   </section>
 
-  <!-- Projects -->
+  <!-- Projects (unchanged content – just styled) -->
   <section id="projects" class="section alt">
     <div class="container two-col">
       <div class="sticky-col">
@@ -254,22 +269,17 @@
           <h3>Autopilot rollout + GPO → Intune transition</h3>
           <p class="meta">Lowther Hall</p>
           <p><strong>Problem</strong> legacy imaging and GPO led to slow builds and drift.</p>
-          <p><strong>Action</strong> mapped existing GPO settings, recreated them in Intune (configuration profiles, baselines, naming, ESP, compliance), packaged Win32 apps, planned cutover and documented.</p>
+          <p><strong>Action</strong> recreated GPOs in Intune (config profiles, baselines, naming, ESP, compliance), packaged Win32 apps, planned cutover and documented.</p>
           <p><strong>Result</strong> reliable zero-touch provisioning with consistent policy state.</p>
           <div class="stack"><span>Intune</span><span>Autopilot</span><span>Config profiles</span><span>PowerShell</span></div>
         </article>
-
-        <article class="card reveal">
-          <h3>Buyer-seller mobile interface</h3>
-          <p class="meta">Melbourne Institute of Technology · Mar 2021 to Oct 2021</p>
-          <p>Built during my degree. B2B interface with payments — won “Second Best Project Award”.</p>
-          <div class="stack"><span>Python</span><span>PHP</span><span>MySQL</span></div>
-        </article>
       </div>
     </div>
+
+    <div class="section-divider"></div>
   </section>
 
-  <!-- Setup (desk) -->
+  <!-- Setup -->
   <section id="setup" class="section">
     <div class="container two-col">
       <div class="sticky-col">
@@ -280,6 +290,7 @@
         <img class="setup-img" src="img/setup1.jpg" alt="Desk setup" />
       </div>
     </div>
+    <div class="section-divider"></div>
   </section>
 
   <!-- Education -->
@@ -309,6 +320,7 @@
         </div>
       </div>
     </div>
+    <div class="section-divider"></div>
   </section>
 
   <!-- Contact -->
@@ -324,7 +336,7 @@
           <div class="cta-row">
             <a class="btn" href="mailto:sumanneupane008@gmail.com">Email me</a>
             <a class="btn btn-outline" href="tel:+61450481379">Call</a>
-            <a class="btn btn-ghost" href="./cv.html" target="_blank" rel="noopener">Preview CV</a>
+            <a class="btn btn-ghost" href="img/sumann.pdf" download>Resume</a>
           </div>
         </div>
 
@@ -335,13 +347,7 @@
               <li><span>Location</span><span>Melbourne, VIC</span></li>
               <li><span>Email</span><span><a href="mailto:sumanneupane008@gmail.com">sumanneupane008@gmail.com</a></span></li>
               <li><span>Phone</span><span><a href="tel:+61450481379">0450 481 379</a></span></li>
-              <li>
-                <span>Resume</span>
-                <span>
-                  <a href="./cv.html" target="_blank" rel="noopener">Preview</a> ·
-                  <a href="./img/sumann.pdf" download>Download PDF</a>
-                </span>
-              </li>
+              <li><span>Resume</span><span><a href="img/sumann.pdf" download>Download PDF</a></span></li>
             </ul>
           </div>
 
@@ -361,10 +367,10 @@
 
       <!-- Working FormSubmit form -->
       <form action="https://formsubmit.co/sumanneupane009@gmail.com" method="POST" class="card contact-form reveal">
-        <input type="hidden" name="_subject" value="New message from sumanneupane1.github.io">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://sumanneupane1.github.io/#contact">
+        <input type="hidden" name="_subject" value="New message from sumanneupane.com" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://sumanneupane.com/#contact" />
 
         <h3>Send a message</h3>
         <label>
@@ -394,54 +400,6 @@
       <p>© <span id="year"></span> Suman Neupane</p>
     </div>
   </footer>
-
-  <!-- Helpers for theme/nav/year; app.js runs after -->
-  <script>
-    // initial theme from storage or system (uses body.light-mode)
-    (function(){
-      const saved = localStorage.getItem('sn-theme'); // 'light' | 'dark'
-      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-      if (saved === 'light' || (!saved && prefersLight)) document.body.classList.add('light-mode');
-      const btn = document.getElementById('themeToggle');
-      if (document.body.classList.contains('light-mode')) { btn.textContent = '☀'; btn.setAttribute('aria-pressed','true'); }
-    })();
-
-    // toggle theme
-    document.getElementById('themeToggle')?.addEventListener('click', (e) => {
-      const isLight = document.body.classList.toggle('light-mode');
-      localStorage.setItem('sn-theme', isLight ? 'light' : 'dark');
-      e.currentTarget.textContent = isLight ? '☀' : '☾';
-      e.currentTarget.setAttribute('aria-pressed', isLight ? 'true' : 'false');
-
-      // optional: sweep effect hook (CSS will ignore if not present)
-      const veil = document.createElement('div');
-      veil.className = 'theme-veil';
-      veil.dataset.mode = isLight ? 'light' : 'dark';
-      document.body.appendChild(veil);
-      setTimeout(() => veil.remove(), 900);
-    });
-
-    // mobile nav
-    document.querySelector('.nav-toggle')?.addEventListener('click', (e) => {
-      const list = document.querySelector('.nav-links');
-      const open = list.classList.toggle('open');
-      e.currentTarget.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-
-    // footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // scroll progress
-    const pb = document.querySelector('.progress-bar');
-    const onScroll = () => {
-      const h = document.documentElement;
-      const sc = h.scrollTop || document.body.scrollTop;
-      const max = h.scrollHeight - h.clientHeight;
-      pb.style.width = (sc / max) * 100 + '%';
-    };
-    document.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  </script>
 
   <script src="app.js"></script>
 </body>
