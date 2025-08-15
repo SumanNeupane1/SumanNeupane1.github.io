@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resume — Suman Neupane (Preview)</title>
+  <meta name="description" content="Preview of Suman Neupane's resume (PDF)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#111827;
+      --panel:#0B1220cc;
+      --text:#E5E7EB;
+      --accent:#e0518f;
+      --accent-2:#a78bfa;
+      --outline: #ffffff2b;
+      --radius: 14px;
+    }
+    /* Soft light fallback if someone opens this page directly after switching to light */
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f4f6fb; --panel:#ffffffcc; --text:#0b1220; --outline:#dde3f0; }
+    }
+
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(800px 400px at 15% 10%, rgba(224,81,143,.10), transparent 60%),
+        radial-gradient(900px 460px at 85% 12%, rgba(167,139,250,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg), #1f2937);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .topbar{
+      position:sticky; top:0; z-index:5;
+      display:flex; align-items:center; gap:.5rem; justify-content:space-between;
+      padding:.75rem .9rem;
+      backdrop-filter: blur(10px) saturate(130%);
+      background: var(--panel);
+      border-bottom:1px solid var(--outline);
+    }
+    .brand{
+      display:inline-flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.2px;
+    }
+    .brand .dot{ width:8px; height:8px; border-radius:50%; background:linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow:0 0 14px rgba(224,81,143,.45)}
+    .actions{ display:flex; gap:.5rem; flex-wrap:wrap; }
+
+    .btn{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.55rem .8rem;
+      border-radius: var(--radius);
+      border:1px solid var(--outline);
+      color:var(--text);
+      background: #ffffff10;
+      text-decoration:none;
+      font-weight:700; cursor:pointer;
+      transition: filter .2s, transform .15s;
+    }
+    .btn:hover{ filter:brightness(1.06); transform:translateY(-1px) }
+    .btn.primary{
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color:#fff; border:0;
+    }
+
+    /* Viewer area */
+    .viewer{
+      height: calc(100vh - 64px); /* subtract approx topbar height */
+      min-height: 60vh;
+      display:grid;
+    }
+    .viewer iframe, .viewer object, .viewer embed{
+      width:100%; height:100%; border:0; background:#fff;
+      border-radius: 0;
+    }
+
+    /* Fallback message (shown only if object fails) */
+    .fallback{
+      display:none; place-items:center; text-align:center; padding:2rem; color:var(--text);
+    }
+    .no-pdf .fallback{ display:grid; }
+    .note{ opacity:.75; font-size:.95rem; margin-top:.35rem; }
+
+    /* Small screens */
+    @media (max-width:640px){
+      .topbar{ gap:.75rem; }
+      .brand span{ display:none; }
+      .viewer{ height: calc(100vh - 58px); }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Resume preview</span>
+    </div>
+    <div class="actions">
+      <a class="btn" href="./index.html">Back</a>
+      <a class="btn" href="./img/sumann.pdf" target="_blank" rel="noopener">Open original</a>
+      <a class="btn primary" href="./img/sumann.pdf" download>Download PDF</a>
+      <button class="btn" onclick="window.frames[0]?.focus(); window.frames[0]?.print();">Print</button>
+    </div>
+  </header>
+
+  <main class="viewer" id="viewer">
+    <!-- Use <iframe> for better iOS support; browsers fall back to viewer plugins -->
+    <iframe src="./img/sumann.pdf#toolbar=1&navpanes=0&view=FitH" title="Suman Neupane — Resume (PDF)"></iframe>
+
+    <!-- Graceful fallback if the PDF can't be embedded -->
+    <div class="fallback" id="fallback">
+      <div>
+        <h2>Can’t preview the PDF here</h2>
+        <p>Some mobile browsers block inline PDF viewers.</p>
+        <p class="note">Tap <strong>Open original</strong> above to view it in your browser / Files app, or use <strong>Download PDF</strong>.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Detect if the PDF failed to load (basic heuristic)
+    (function () {
+      // Give the iframe a moment; if its contentWindow is null in some cases we still show fallback
+      const iframe = document.querySelector('iframe');
+      const fallbackContainer = document.getElementById('fallback');
+      const viewer = document.getElementById('viewer');
+
+      let fallbackTimer = setTimeout(() => {
+        // If the iframe didn't trigger a load event after 2.5s, show fallback UI
+        document.body.classList.add('no-pdf');
+      }, 2500);
+
+      iframe.addEventListener('load', () => {
+        // Loaded — hide fallback
+        clearTimeout(fallbackTimer);
+        document.body.classList.remove('no-pdf');
+      });
+
+      iframe.addEventListener('error', () => {
+        clearTimeout(fallbackTimer);
+        document.body.classList.add('no-pdf');
+      });
+    })();
+  </script>
+</body>
+</html>
