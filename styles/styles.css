@@ -17,23 +17,24 @@ body{
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 
-/* ---------- Color tokens (Dark) ---------- */
-/* Jacket red accents for dark mode */
 :root{
+  /* Dark theme — jacket red */
   --bg:#323c53;
   --bg2:#2b3347;
-  --panel:#222a3b;
-  --card:#3b4662;
+
+  --panel:#222a3b;     /* header/footer glass base */
+  --card:#3b4662;      /* card base */
   --elev:#465272;
 
   --text:#e9eef6;
   --muted:#aab3c7;
 
-  --accent:#c5303a;         /* dark red (jacket) */
-  --accent-2:#d66ba0;       /* soft red-violet */
+  --accent:#c23843;    /* deep red */
+  --accent-2:#ff889b;  /* warm pink for gradients */
 
   --outline:rgba(255,255,255,.12);
-  --track:rgba(255,255,255,.10);
+  --outline-strong:rgba(255,255,255,.22);
+  --track:rgba(255,255,255,.1);
 
   --radius:20px;
   --shadow:0 16px 40px rgba(0,0,0,.35);
@@ -45,29 +46,30 @@ a{color:inherit;text-decoration:none}
     linear-gradient(180deg, var(--bg), var(--bg2));
 }
 
-/* ---------- Light Mode (soft pink, stronger structure) ---------- */
+/* Light mode — friendly, clearly separated */
 body.light-mode{
-  --bg:#f6f7fb;
+  --bg:#f5f7fb;
   --bg2:#eef2f8;
+
   --panel:#ffffff;
   --card:#ffffff;
-  --elev:#fbfdff;
+  --elev:#fbfcfe;
 
   --text:#0b1220;
-  --muted:#4a5568;
+  --muted:#4f5b6d;
 
-  /* softer pinks for comfort */
-  --accent:#e8749e;        /* gentle pink (main) */
-  --accent-2:#f5b8cf;      /* lighter pink for gradients */
+  /* soft jacket pinks for less eye strain */
+  --accent:#f199a6;
+  --accent-2:#e47d93;
 
-  --outline:#e2e8f3;       /* visible borders */
-  --track:#eff3f9;
+  --outline:#e5e9f2;
+  --outline-strong:#d7deea;
+  --track:#f0f3f9;
 
-  --shadow:0 14px 40px rgba(15,23,42,.08);
-
+  --shadow:0 20px 42px rgba(8,19,53,.08);
   --grad-soft:
-    radial-gradient(820px 420px at 12% 10%, rgba(232,116,158,.08), transparent 60%),
-    radial-gradient(1000px 520px at 86% 14%, rgba(149,164,255,.06), transparent 60%),
+    radial-gradient(900px 420px at 14% 10%, rgba(241,153,166,.10), transparent 60%),
+    radial-gradient(900px 420px at 86% 16%, rgba(128,160,255,.08), transparent 60%),
     linear-gradient(180deg, var(--bg), var(--bg2));
 }
 
@@ -84,23 +86,18 @@ body, .site-header, .nav-links a, .theme-btn,
 }
 
 /* ===================================================================
-   Header / Nav (glass in both themes)
+   Header / Nav (frosted glass in both themes)
    =================================================================== */
 .site-header{
   position:sticky; top:0; z-index:60;
+  backdrop-filter:saturate(180%) blur(14px);
+  background:color-mix(in oklab, var(--panel) 82%, transparent);
   border-bottom:1px solid var(--outline);
-  backdrop-filter:blur(14px) saturate(160%);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0)) 0 0/100% 100%,
-    color-mix(in oklab, var(--panel) 78%, transparent);
 }
-body.light-mode .site-header{
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.28)) 0 0/100% 100%,
-    rgba(255,255,255,.82);
-  box-shadow:0 8px 24px rgba(2,6,23,.06);
+.site-header.scrolled{
+  background:color-mix(in oklab, var(--panel) 92%, transparent);
+  box-shadow:0 8px 24px rgba(2,6,23,.10);
 }
-
 .nav-row{display:flex;align-items:center;justify-content:space-between;padding:.85rem 0}
 .brand{font-weight:800;letter-spacing:.4px;color:var(--text)}
 
@@ -116,6 +113,7 @@ body.light-mode .site-header{
 .nav-links a:hover{background:var(--track)}
 .nav-links a:hover::after{transform:scaleX(1)}
 
+/* Toggle */
 .nav-toggle{display:none;background:transparent;border:0;cursor:pointer}
 .nav-toggle span{display:block;width:22px;height:2px;background:var(--text);margin:4px 0;border-radius:2px}
 
@@ -124,7 +122,7 @@ body.light-mode .site-header{
   .nav{position:relative}
   .nav-links{
     position:absolute;right:0;top:110%;
-    background: color-mix(in oklab, var(--panel) 90%, transparent);
+    background: color-mix(in oklab, var(--panel) 96%, transparent);
     border:1px solid var(--outline);border-radius:14px;padding:.6rem;
     box-shadow:var(--shadow);
     display:none;flex-direction:column;min-width:240px;
@@ -133,18 +131,22 @@ body.light-mode .site-header{
   .nav-links.open{display:flex}
 }
 
-/* Theme btn */
+/* Theme button */
 .theme-btn{
   border:1px solid var(--outline);
-  background: color-mix(in oklab, var(--card) 88%, transparent);
+  background: color-mix(in oklab, var(--card) 90%, transparent);
   color:var(--text);
   border-radius:14px;width:38px;height:38px;
-  display:grid;place-items:center;box-shadow:var(--shadow);
+  display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.12);
   cursor:pointer;margin-left:.6rem
 }
 
 /* Progress bar */
-.progress-bar{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:9999}
+.progress-bar{
+  position:fixed;left:0;top:0;height:3px;width:0;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  z-index:9999
+}
 
 /* ===================================================================
    Sections + dividers
@@ -154,38 +156,28 @@ body.light-mode .site-header{
 .section-title{font-size:clamp(1.6rem,2.6vw,2.4rem);margin:0 0 .5rem}
 .section-lead{color:var(--muted);max-width:60ch;margin:0 0 1.2rem}
 
-.section-divider{
-  height:54px;margin-top:36px;
-  background:
-    radial-gradient(1000px 180px at 50% 30%, rgba(255,255,255,.10), transparent 60%),
-    linear-gradient(180deg, transparent, rgba(0,0,0,.06), transparent);
-  filter:blur(10px);opacity:.65
-}
-body.light-mode .section-divider{
-  background:
-    radial-gradient(1000px 180px at 50% 30%, rgba(0,0,0,.06), transparent 60%),
-    linear-gradient(180deg, transparent, rgba(0,0,0,.05), transparent);
-}
-
 /* Layout helpers */
 .two-col{display:grid;grid-template-columns:1fr;gap:2rem}
 @media(min-width:980px){.two-col{grid-template-columns:1.1fr .9fr}}
 .sticky-col{position:sticky;top:86px;height:fit-content;z-index:1}
 @media(max-width:980px){.sticky-col{position:static}}
 
-/* Cards */
+/* Cards (stronger borders in light mode) */
 .card{
   background:linear-gradient(var(--card),var(--card)) padding-box;
-  border:1px solid var(--outline);
+  border:1px solid var(--outline-strong);
   border-radius:var(--radius);
-  padding:1.25rem;box-shadow:var(--shadow);
+  padding:1.25rem;
+  box-shadow:0 14px 36px rgba(0,0,0,.20), 0 0 0 1px var(--outline);
   backdrop-filter:blur(14px) saturate(130%);
-  transform:translateZ(0);
 }
-.card:hover{transform:translateY(-4px)}
+body.light-mode .card{
+  box-shadow:0 10px 30px rgba(8,19,53,.08), 0 0 0 1px var(--outline-strong);
+}
+.card:hover{transform:translateY(-2px)}
 
 /* ===================================================================
-   Hero (smaller + BW default; improved frame in light mode)
+   Hero
    =================================================================== */
 .hero{background:var(--grad-soft);position:relative}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center;min-height:70vh}
@@ -198,7 +190,10 @@ body.light-mode .section-divider{
 .linkedin-hero:hover{filter:brightness(1.05);transform:translateY(-1px)}
 
 h1{font-size:clamp(1.9rem,3.4vw,3.2rem);line-height:1.14;margin:.25rem 0 1rem}
-h1 span{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 span{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
 .lead{color:var(--muted);max-width:60ch;margin-bottom:1.5rem}
 
 .cta-row{display:flex;gap:.8rem;flex-wrap:wrap}
@@ -209,63 +204,63 @@ h1 span{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit
 
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.2rem}
 @media(max-width:720px){.stats{grid-template-columns:1fr}}
-.stat-num{font-weight:900;font-size:clamp(2.1rem,5vw,3.2rem);background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-num{
+  font-weight:900;font-size:clamp(2.1rem,5vw,3.2rem);
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
 .stat-label{color:var(--muted)}
 
 .hero-visual{position:relative;display:grid;place-items:center}
 .hero-image-wrap{
-  position:relative;border-radius:24px;overflow:hidden;
-  background:linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, transparent), color-mix(in oklab, var(--panel) 85%, transparent));
-  border:1px solid var(--outline);box-shadow:var(--shadow);
-  isolation:isolate;
-  transform:scale(.82);                      /* ~20% smaller on desktop */
-  transform-origin:center right;
-}
-@media(max-width:980px){ .hero-image-wrap{ transform:none; } }
-
-/* Clearer frame on light mode (border + halo) */
-body.light-mode .hero-image-wrap{
-  background:linear-gradient(180deg,#ffffff 0%,#f7f9ff 100%);
+  position:relative;border-radius:26px;overflow:hidden;
+  background:color-mix(in oklab,var(--card) 70%, transparent);
+  border:1px solid var(--outline-strong);
   box-shadow:
-    0 16px 40px rgba(15,23,42,.10),
-    0 0 0 1px var(--outline),
-    0 0 0 10px color-mix(in oklab, var(--accent) 10%, transparent); /* soft pink ring */
+    0 24px 60px rgba(0,0,0,.35),
+    0 0 0 1px var(--outline-strong),
+    0 0 0 10px color-mix(in oklab, var(--accent) 15%, transparent);
+  isolation:isolate;
 }
-
+body.light-mode .hero-image-wrap{
+  box-shadow:
+    0 24px 46px rgba(8,19,53,.10),
+    0 0 0 1px var(--outline-strong),
+    0 0 0 12px color-mix(in oklab, var(--accent) 12%, transparent);
+}
 .hero-image{
-  width:min(520px,92vw);height:auto;display:block;
-  filter:grayscale(1) contrast(1.05);        /* BW default */
+  /* ~20% smaller than before */
+  width:min(420px, 88vw);
+  height:auto;
+  display:block;
+  filter:grayscale(1) contrast(1.05) saturate(.9);
   transition:filter .35s ease;
 }
-.hero-visual:hover .hero-image,
-.hero-image-wrap:focus-within .hero-image{ filter:none; }
+.hero-image-wrap:hover .hero-image{filter:none}
 
 .orb{position:absolute;border-radius:999px;filter:blur(30px);opacity:.55;pointer-events:none}
-.orb-1{width:300px;height:300px;background:rgba(206,46,58,.45);top:6%;right:10%;animation:float 12s ease-in-out infinite alternate}
-.orb-2{width:220px;height:220px;background:rgba(128,160,255,.30);bottom:8%;left:8%;animation:float 14s ease-in-out infinite alternate}
-body.light-mode .orb-1{background:rgba(232,116,158,.24)}
-body.light-mode .orb-2{background:rgba(232,116,158,.12)}
+.orb-1{width:300px;height:300px;background:rgba(194,56,67,.35);top:6%;right:10%;animation:float 12s ease-in-out infinite alternate}
+.orb-2{width:220px;height:220px;background:rgba(128,160,255,.28);bottom:8%;left:8%;animation:float 14s ease-in-out infinite alternate}
+body.light-mode .orb-1{background:rgba(241,153,166,.24)}
+body.light-mode .orb-2{background:rgba(241,153,166,.12)}
 @keyframes float{from{transform:translateY(-6px)}to{transform:translateY(8px)}}
 
 /* ===================================================================
-   Timeline
+   Timeline (fix dot layering)
    =================================================================== */
 .timeline{position:relative;margin:0;padding:0 0 0 1.6rem;list-style:none}
 .timeline::before{
   content:"";position:absolute;left:.6rem;top:0;bottom:0;width:2px;
-  background:linear-gradient(180deg,var(--accent) 0%, transparent 60%);opacity:.85;
-  filter: drop-shadow(0 0 6px color-mix(in oklab,var(--accent) 50%, transparent));
+  background:linear-gradient(180deg,var(--accent) 0%, transparent 60%);opacity:.75
 }
-.t-item{position:relative;margin:0 0 1.7rem}
+.t-item{position:relative;margin:0 0 1.7rem;z-index:1}
 .t-dot{
   position:absolute;left:-.1rem;top:.9rem;width:.92rem;height:.92rem;border-radius:50%;
   background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  box-shadow:0 0 0 7px color-mix(in oklab,var(--accent) 35%, transparent), 0 12px 24px rgba(0,0,0,.25);
+  box-shadow:0 0 0 7px color-mix(in oklab,var(--accent) 35%, transparent);
   z-index:3;
 }
-/* keep the dot above the card edge */
-.timeline .card{ position:relative; z-index:2; overflow:visible; }
-
+.timeline .card{position:relative;z-index:2}
 .company-head{display:flex;gap:1rem;align-items:center;justify-content:space-between}
 .company-logo{width:120px;height:120px;object-fit:contain}
 @media(max-width:560px){.company-logo{width:78px;height:78px}}
@@ -277,13 +272,12 @@ body.light-mode .orb-2{background:rgba(232,116,158,.12)}
 .stack{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
 .stack span{
   display:inline-flex;padding:.35rem .65rem;border:1px solid var(--outline);
-  border-radius:999px;
-  background:linear-gradient(180deg, color-mix(in oklab,var(--card) 92%, transparent), color-mix(in oklab,var(--elev) 92%, transparent));
+  border-radius:999px;background:linear-gradient(180deg, color-mix(in oklab,var(--card) 92%, transparent), color-mix(in oklab,var(--elev) 92%, transparent));
   font-size:.9rem
 }
 
 /* ===================================================================
-   Skills: chips + bars
+   Skills
    =================================================================== */
 .skills{display:grid;gap:1.25rem}
 .chip-group h4{margin:.25rem 0 .5rem}
@@ -305,52 +299,62 @@ body.light-mode .orb-2{background:rgba(232,116,158,.12)}
 .bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:999px}
 
 /* ===================================================================
-   Projects — spacing + gentle hover
+   Projects — spacing + hover
    =================================================================== */
-.cards{display:grid;grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem}
-.cards .card{transition:transform .25s ease, box-shadow .3s ease}
-.cards .card:hover{transform:translateY(-6px); box-shadow:0 18px 44px rgba(0,0,0,.32)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
+.cards > .card{will-change:transform,box-shadow}
+.cards > .card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 40px rgba(0,0,0,.30), 0 0 0 1px var(--outline-strong);
+}
 
 /* ===================================================================
    Setup / Contact
    =================================================================== */
-.setup-img{width:100%;height:auto;border-radius:22px;border:1px solid var(--outline);box-shadow:var(--shadow)}
+.setup-img{
+  width:100%;height:auto;border-radius:22px;border:1px solid var(--outline-strong);
+  box-shadow:0 14px 36px rgba(0,0,0,.22), 0 0 0 1px var(--outline)
+}
 
 .contact-grid{display:grid;grid-template-columns:1fr;gap:1.2rem}
 @media(min-width:980px){.contact-grid{grid-template-columns:1.1fr .9fr}}
-.contact-banner{position:relative;overflow:hidden;border-radius:var(--radius);background:linear-gradient(180deg, color-mix(in oklab,var(--card) 85%, transparent), color-mix(in oklab,var(--panel) 82%, transparent));border:1px solid var(--outline)}
+.contact-banner{
+  position:relative;overflow:hidden;border-radius:var(--radius);
+  background:linear-gradient(180deg, color-mix(in oklab,var(--card) 90%, transparent), color-mix(in oklab,var(--panel) 86%, transparent));
+  border:1px solid var(--outline-strong)
+}
 .contact-cards{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
 @media(min-width:680px){.contact-cards{grid-template-columns:1fr 1fr}}
 
 .contact-list{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
-.contact-list li{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px dashed var(--outline);padding:.4rem 0}
+.contact-list li{
+  display:flex;justify-content:space-between;gap:1rem;
+  border-bottom:1px dashed var(--outline);padding:.4rem 0
+}
 
-/* Form controls */
+/* Form controls with visible borders in light mode */
 .contact-form input,.contact-form textarea{
-  width:100%;background:transparent;border:1px solid var(--outline);
+  width:100%;background:transparent;border:1px solid var(--outline-strong);
   border-radius:14px;padding:.8rem 1rem;color:var(--text)
 }
 .contact-form input:focus,.contact-form textarea:focus{
-  outline:none;border-color: var(--accent);
+  outline:none;border-color:var(--accent);
   box-shadow:0 0 0 4px color-mix(in oklab, var(--accent) 28%, transparent);
-  background: color-mix(in oklab, var(--card) 94%, transparent);
+  background:color-mix(in oklab,var(--card) 92%, transparent)
 }
 .contact-form button{margin-top:.6rem}
 
-/* ===================================================================
-   Footer
-   =================================================================== */
-.site-footer{padding:2.4rem 0;background:var(--panel);color:var(--muted);text-align:center;border-top:1px solid var(--outline)}
+/* Footer */
+.site-footer{
+  padding:2.4rem 0;background:var(--panel);color:var(--muted);
+  text-align:center;border-top:1px solid var(--outline)
+}
 
-/* ===================================================================
-   Reveal on scroll
-   =================================================================== */
+/* Reveal */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
 
-/* ===================================================================
-   Mobile polish
-   =================================================================== */
+/* Mobile polish */
 @media (max-width: 820px){
   .section{padding:4.2rem 0}
   .card{box-shadow:0 10px 26px rgba(0,0,0,.22)}
