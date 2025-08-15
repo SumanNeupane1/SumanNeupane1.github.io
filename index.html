@@ -1,377 +1,423 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Suman Neupane • IT Support, Systems, Endpoints</title>
-  <meta name="description" content="Suman Neupane — IT Support & Systems with hands-on experience across identity, endpoints, messaging and admin." />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-
-  <!-- Stylesheet + fallback -->
-  <link id="maincss" rel="stylesheet" href="styles.css">
-  <script>
-    (function () {
-      // If CSS vars are missing (stylesheet 404), point to /styles/styles.css
-      const v = getComputedStyle(document.documentElement).getPropertyValue('--bg');
-      if (!v || !v.trim()) document.getElementById('maincss').setAttribute('href', 'styles/styles.css');
-    })();
-  </script>
-
-  <meta name="theme-color" content="#2e374c" />
+  <title>Suman Neupane | IT Support and Operations</title>
+  <meta name="description" content="Level 2 IT Support with strengths in endpoint management, identity, messaging and infrastructure. Intune, Autopilot, JAMF, AD, Exchange Online, VMware." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/styles.css" />
 </head>
+
 <body>
+  <!-- Progress bar -->
+  <div class="progress-bar" aria-hidden="true"></div>
 
-  <!-- scroll progress -->
-  <div class="progress-bar" id="progress"></div>
-
-  <!-- header -->
+  <!-- Header -->
   <header class="site-header">
     <div class="container nav-row">
-      <div class="brand">SN</div>
+      <div class="nav-left">
+        <a class="brand" href="#home">SN</a>
+      </div>
 
       <nav class="nav">
-        <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
           <span class="nav-toggle-bar"></span>
           <span class="nav-toggle-bar"></span>
           <span class="nav-toggle-bar"></span>
         </button>
-
-        <div class="nav-links" id="navLinks">
-          <a href="#home">Home</a>
-          <a href="#experience">Experience</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#setup">Setup</a>
-          <a href="#education">Education</a>
-          <a href="#contact">Contact</a>
-        </div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#setup">Setup</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </nav>
 
-      <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme" aria-pressed="false">☾</button>
     </div>
   </header>
 
-  <main>
+  <!-- Hero -->
+  <section id="home" class="section hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
 
-    <!-- HERO -->
-    <section id="home" class="section hero alt reveal">
-      <div class="container hero-grid">
-        <div>
-          <a class="linkedin-hero" href="https://www.linkedin.com/in/suman-neupane-507786182?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener">
-            <svg class="li-ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zm7.98 0h3.84v2.11h.05c.54-1.02 1.86-2.11 3.84-2.11C20.68 8.5 24 10.77 24 16.01V24h-4v-7.14c0-1.7-.03-3.88-2.36-3.88-2.36 0-2.72 1.84-2.72 3.75V24h-4V8.5z"/></svg>
-            LinkedIn
-          </a>
+        <!-- LinkedIn pill ABOVE the eyebrow line -->
+        <a class="linkedin-hero"
+           href="https://www.linkedin.com/in/suman-neupane-507786182?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+           target="_blank" rel="noopener" aria-label="Open LinkedIn profile">
+          <svg viewBox="0 0 24 24" class="li-ic" aria-hidden="true">
+            <path fill="currentColor" d="M4.98 3.5A2.48 2.48 0 1 1 0 3.5a2.48 2.48 0 0 1 4.98 0zM.5 8.5h4V23h-4V8.5zm7.5 0h3.8v2h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.15V23h-4v-6.5c0-1.55-.03-3.55-2.17-3.55-2.18 0-2.51 1.7-2.51 3.43V23H8V8.5z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
 
-          <div class="eyebrow">IT Support • Systems • Endpoints</div>
-          <h1>Hi, I am <span>Suman</span> Neupane</h1>
-          <p class="lead">
-            Level 2 IT Support professional who loves solving real problems—across user support,
-            identity, endpoint management and messaging. I’ve moved steadily into backend and
-            systems-admin style work (Intune/Autopilot, JAMF, AD, Exchange Online, VMware) and I’m
-            keen to apply that in any environment—education, enterprise, or government.
-          </p>
+        <p class="eyebrow">IT Support • Systems • Endpoints</p>
 
-          <div class="cta-row">
-            <a class="btn" href="sumann.pdf" download>Download CV</a>
-            <a class="btn btn-ghost" href="#contact">Contact</a>
-          </div>
-
-          <div class="stats">
-            <div class="card">
-              <div class="stat-num">2.5+</div>
-              <div class="stat-label">Years experience</div>
-            </div>
-            <div class="card">
-              <div class="stat-num">4+</div>
-              <div class="stat-label">Key projects shipped</div>
-            </div>
-            <div class="card">
-              <div class="stat-num">15+</div>
-              <div class="stat-label">Sites supported</div>
-            </div>
-          </div>
+        <h1>Hi, I am <span>Suman Neupane</span></h1>
+        <p class="lead">
+          Level 2 IT Support professional who loves solving real problems—across user support,
+          identity, endpoint management and messaging. I’ve moved steadily into backend and
+          systems-admin style work (Intune/Autopilot, JAMF, AD, Exchange Online, VMware) and I’m keen
+          to apply that in any environment—education, enterprise, or government.
+        </p>
+        <div class="cta-row">
+          <a class="btn" href="sumann.pdf" download>Download CV</a>
+          <a class="btn btn-ghost" href="#contact">Contact</a>
         </div>
 
-        <div class="hero-visual">
-          <div class="hero-image-wrap">
-            <span class="orb orb-1"></span>
-            <span class="orb orb-2"></span>
-            <img class="hero-image" src="img/suman.png" onerror="this.src='img/lowtherhall.png';" alt="Suman Neupane">
+        <div class="stats">
+          <div class="stat card reveal">
+            <div class="stat-num" data-count="2.5" data-decimals="1" data-suffix="+">0</div>
+            <div class="stat-label">Years experience</div>
+          </div>
+          <div class="stat card reveal">
+            <div class="stat-num" data-count="4" data-decimals="0" data-suffix="+">0</div>
+            <div class="stat-label">Key projects shipped</div>
+          </div>
+          <div class="stat card reveal">
+            <div class="stat-num" data-count="15" data-decimals="0" data-suffix="+">0</div>
+            <div class="stat-label">Sites supported</div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section reveal">
-      <div class="container">
+      <div class="hero-visual">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="hero-image-wrap">
+          <img src="img/hero.png" alt="Suman portrait" class="hero-image" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="section alt">
+    <div class="container two-col">
+      <div class="sticky-col">
         <h2 class="section-title">Experience</h2>
         <p class="section-lead">Support, administration and project work across multi-site environments.</p>
-
-        <ol class="timeline">
-          <!-- Lowther Hall -->
-          <li class="t-item timeline-item">
-            <span class="t-dot"></span>
-            <article class="card">
-              <div class="company-head">
-                <h3>IT Support and Operations</h3>
-                <img class="company-logo" src="img/lowtherhall.png" alt="Lowther Hall logo">
-              </div>
-              <div class="meta">Lowther Hall Anglican Grammar School · Dec 2024 to Present · Melbourne</div>
-              <ul class="bullets">
-                <li>Managed AD accounts and GPO for staff and students; clean onboarding/offboarding.</li>
-                <li>Supported Google Workspace, M365, Synergetic and Schoolbox.</li>
-                <li>Autopilot for executive and student devices; policy review and ESP tuning.</li>
-                <li><strong>Replatformed helpdesk</strong> to ManageEngine ServiceDesk Plus (AD sync, mail-to-ticket, SLAs/approvals, KB, asset discovery); trained staff.</li>
-                <li>Deployed agents via GPO for asset scanning and endpoint visibility.</li>
-                <li>Mail groups, rules and permissions in Exchange Online.</li>
-                <li>MITEL phones with vendor coordination. AV for assemblies, exams, livestreams.</li>
-                <li>Executive-level IT service reporting for planning and risk.</li>
-              </ul>
-              <div class="tags">
-                <span>AD</span><span>Azure AD</span><span>Intune</span><span>Autopilot</span>
-                <span>JAMF</span><span>Exchange Online</span><span>ServiceDesk Plus</span>
-              </div>
-            </article>
-          </li>
-
-          <!-- Johns Lyng Group -->
-          <li class="t-item timeline-item">
-            <span class="t-dot"></span>
-            <article class="card">
-              <div class="company-head">
-                <h3>IT Support Engineer</h3>
-                <img class="company-logo" src="img/jlg.png" alt="Johns Lyng Group logo">
-              </div>
-              <div class="meta">Johns Lyng Group · Emergency Recovery Victoria · Dec 2022 to Sep 2024</div>
-              <ul class="bullets">
-                <li>Supported 15 sites / 500+ users (Helpdesk + phones). Hardware/software triage.</li>
-                <li>Configured and maintained multi-site networks and computing systems.</li>
-                <li>End-user training and asset inventory across VIC, NSW, SA.</li>
-                <li>Built IT frameworks and docs for new sites; rapid deployment.</li>
-                <li>Monitoring collaboration and new tech evals; improved performance.</li>
-                <li>Coordinated disaster-ready IT kits &amp; network access; prioritized critical incidents.</li>
-                <li>Reports for management on usage, inventory and procurement.</li>
-              </ul>
-              <div class="tags">
-                <span>M365</span><span>AD</span><span>VMware</span><span>Azure</span>
-                <span>Exchange</span><span>FortiClient</span><span>Trend Micro</span>
-              </div>
-            </article>
-          </li>
-        </ol>
       </div>
-    </section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="section alt reveal">
-      <div class="container">
+      <ol class="timeline">
+        <li class="t-item reveal">
+          <div class="t-dot"></div>
+          <article class="t-card card">
+            <div class="company-head">
+              <h3>IT Support and Operations</h3>
+              <img class="company-logo" src="img/lowtherhall.png" alt="Lowther Hall logo" loading="lazy">
+            </div>
+            <p class="meta">Lowther Hall Anglican Grammar School · Dec 2024 to Present · Melbourne</p>
+            <ul class="bullets">
+              <li>Managed AD accounts and GPO for staff and students; clean onboarding/offboarding.</li>
+              <li>Supported Google Workspace, M365, Synergetic and Schoolbox.</li>
+              <li>Autopilot for executive and student devices; policy review and ESP tuning.</li>
+              <li><strong>Replatformed helpdesk</strong> to ManageEngine ServiceDesk Plus (AD sync, mail-to-ticket, SLAs/approvals, KB, asset discovery); trained staff.</li>
+              <li>Deployed agents via GPO for asset scanning and endpoint visibility.</li>
+              <li>Mail groups, rules and permissions in Exchange Online.</li>
+              <li>MITEL phones with vendor coordination. AV for assemblies, exams, livestreams.</li>
+              <li>Executive-level IT service reporting for planning and risk.</li>
+            </ul>
+            <div class="stack">
+              <span>AD</span><span>Azure AD</span><span>Intune</span><span>Autopilot</span><span>JAMF</span><span>Exchange Online</span><span>ServiceDesk Plus</span>
+            </div>
+          </article>
+        </li>
+
+        <li class="t-item reveal">
+          <div class="t-dot"></div>
+          <article class="t-card card">
+            <div class="company-head">
+              <h3>IT Support Engineer</h3>
+              <img class="company-logo" src="img/jlg.png" alt="Johns Lyng Group logo" loading="lazy">
+            </div>
+            <p class="meta">Johns Lyng Group · Emergency Recovery Victoria · Dec 2022 to Sep 2024</p>
+            <ul class="bullets">
+              <li>Supported 500+ users across 15 sites in VIC, NSW and SA.</li>
+              <li>Built frameworks for new sites to speed stand-ups and reduce issues.</li>
+              <li>End-user training, asset inventory and compliance uplift.</li>
+              <li>Coordinated disaster-ready IT kits and site turn-ups.</li>
+              <li>Usage/inventory/procurement reporting for management.</li>
+            </ul>
+            <div class="stack">
+              <span>M365 Admin</span><span>AD</span><span>VMware</span><span>Azure</span><span>Exchange</span><span>FortiClient</span><span>Trend Micro</span>
+            </div>
+          </article>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <div class="container two-col">
+      <div class="sticky-col">
         <h2 class="section-title">Technical skills</h2>
         <p class="section-lead">Identity, endpoints, messaging, security and platforms.</p>
+      </div>
 
-        <div class="skills two-col">
-          <div>
-            <div class="chip-group">
-              <h4>Identity and endpoint</h4>
-              <div class="chips">
-                <span class="chip">AD</span>
-                <span class="chip">Azure AD</span>
-                <span class="chip">GPO</span>
-                <span class="chip">Intune</span>
-                <span class="chip">Autopilot</span>
-                <span class="chip">JAMF</span>
-                <span class="chip">Apple School Manager</span>
-              </div>
-            </div>
-
-            <div class="chip-group">
-              <h4>Messaging and security</h4>
-              <div class="chips">
-                <span class="chip">Exchange Online</span>
-                <span class="chip">Mimecast</span>
-                <span class="chip">Trend Micro</span>
-                <span class="chip">Sophos</span>
-                <span class="chip">Palo Alto</span>
-                <span class="chip">SPF</span>
-                <span class="chip">DKIM</span>
-                <span class="chip">DMARC</span>
-              </div>
-            </div>
-
-            <div class="chip-group">
-              <h4>Platforms</h4>
-              <div class="chips">
-                <span class="chip">Windows 10/11</span>
-                <span class="chip">Windows Server 2012–2022</span>
-                <span class="chip">macOS</span>
-                <span class="chip">iOS</span>
-                <span class="chip">Android</span>
-                <span class="chip">VMware</span>
-                <span class="chip">Hyper-V</span>
-              </div>
-            </div>
+      <div class="skills">
+        <div class="chip-group reveal">
+          <h4>Identity and endpoint</h4>
+          <div class="chips" data-stagger>
+            <span class="chip">AD</span><span class="chip">Azure AD</span><span class="chip">GPO</span>
+            <span class="chip">Intune</span><span class="chip">Autopilot</span><span class="chip">JAMF</span>
+            <span class="chip">Apple School Manager</span>
           </div>
+        </div>
 
-          <div>
-            <div class="bars">
-              <div class="bar">
-                <div class="bar-top"><span>Intune and Autopilot</span><span class="bar-val">90%</span></div>
-                <div class="bar-track"><div class="bar-fill" style="width:90%"></div></div>
-              </div>
-              <div class="bar">
-                <div class="bar-top"><span>M365 and Exchange Online</span><span class="bar-val">85%</span></div>
-                <div class="bar-track"><div class="bar-fill" style="width:85%"></div></div>
-              </div>
-              <div class="bar">
-                <div class="bar-top"><span>JAMF and ASM</span><span class="bar-val">82%</span></div>
-                <div class="bar-track"><div class="bar-fill" style="width:82%"></div></div>
-              </div>
-              <div class="bar">
-                <div class="bar-top"><span>AD and GPO</span><span class="bar-val">84%</span></div>
-                <div class="bar-track"><div class="bar-fill" style="width:84%"></div></div>
-              </div>
-              <div class="bar">
-                <div class="bar-top"><span>PowerShell</span><span class="bar-val">70%</span></div>
-                <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
-              </div>
-              <div class="bar">
-                <div class="bar-top"><span>DHCP • DNS • VLANs</span><span class="bar-val">68%</span></div>
-                <div class="bar-track"><div class="bar-fill" style="width:68%"></div></div>
-              </div>
-            </div>
+        <div class="chip-group reveal">
+          <h4>Messaging and security</h4>
+          <div class="chips" data-stagger>
+            <span class="chip">Exchange Online</span><span class="chip">Mimecast</span>
+            <span class="chip">Trend Micro</span><span class="chip">Sophos</span>
+            <span class="chip">Palo Alto</span><span class="chip">SPF</span><span class="chip">DKIM</span><span class="chip">DMARC</span>
+          </div>
+        </div>
+
+        <div class="chip-group reveal">
+          <h4>Platforms</h4>
+          <div class="chips" data-stagger>
+            <span class="chip">Windows 10/11</span><span class="chip">Windows Server 2012–2022</span>
+            <span class="chip">macOS</span><span class="chip">iOS</span><span class="chip">Android</span>
+            <span class="chip">VMware</span><span class="chip">Hyper-V</span>
+          </div>
+        </div>
+
+        <div class="bars reveal">
+          <div class="bar">
+            <div class="bar-top"><span>Intune and Autopilot</span><span class="bar-val" data-val="90">0%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bar-top"><span>M365 and Exchange Online</span><span class="bar-val" data-val="85">0%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bar-top"><span>JAMF and ASM</span><span class="bar-val" data-val="82">0%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bar-top"><span>AD and GPO</span><span class="bar-val" data-val="84">0%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bar-top"><span>PowerShell</span><span class="bar-val" data-val="70">0%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+          </div>
+          <div class="bar">
+            <div class="bar-top"><span>DHCP • DNS • VLANs</span><span class="bar-val" data-val="68">0%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section reveal">
-      <div class="container">
+  <!-- Projects -->
+  <section id="projects" class="section alt">
+    <div class="container two-col">
+      <div class="sticky-col">
         <h2 class="section-title">Projects</h2>
-        <p class="section-lead">Selected work with a quick Problem → Action → Result snapshot.</p>
-
-        <div class="cards">
-          <article class="card">
-            <h3>Portfolio website you’re viewing</h3>
-            <div class="meta">Personal project</div>
-            <p><strong>Problem</strong> older site was static and not engaging.</p>
-            <p><strong>Action</strong> designed and built a modern single-page portfolio with scroll reveals, animated stats and responsive layout. Hosted on GitHub Pages.</p>
-            <p><strong>Result</strong> a clean showcase that loads fast and explains my work clearly.</p>
-            <div class="tags">
-              <span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>ManageEngine ServiceDesk Plus replatform</h3>
-            <div class="meta">Lowther Hall</div>
-            <p><strong>Problem</strong> fragmented helpdesk with poor visibility and manual workflows.</p>
-            <p><strong>Action</strong> implemented SDP from scratch with AD integration, mail-to-ticket, asset discovery, SLAs/approvals and knowledge base; migrated categories/templates and trained staff.</p>
-            <p><strong>Result</strong> faster triage, cleaner reporting and a helpdesk that matches how the school works.</p>
-            <div class="tags">
-              <span>ServiceDesk Plus</span><span>AD</span><span>Exchange</span><span>PowerShell</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Autopilot rollout + GPO → Intune transition</h3>
-            <div class="meta">Lowther Hall</div>
-            <p><strong>Problem</strong> legacy imaging and GPO led to slow builds and drift.</p>
-            <p><strong>Action</strong> mapped existing GPO settings, recreated them in Intune (profiles, baselines, naming, ESP, compliance), packaged Win32 apps, planned cutover and documented.</p>
-            <p><strong>Result</strong> reliable zero-touch provisioning with consistent policy state.</p>
-            <div class="tags">
-              <span>Intune</span><span>Autopilot</span><span>Config profiles</span><span>PowerShell</span>
-            </div>
-          </article>
-        </div>
+        <p class="section-lead">Problem → Action → Result.</p>
       </div>
-    </section>
 
-    <!-- SETUP -->
-    <section id="setup" class="section alt reveal">
-      <div class="container">
+      <div class="cards">
+        <article class="card reveal">
+          <h3>Portfolio website you’re viewing</h3>
+          <p class="meta">Personal project</p>
+          <p><strong>Problem</strong> older site was static and not engaging.</p>
+          <p><strong>Action</strong> designed and built a modern single-page portfolio with scroll reveals, animated stats and responsive layout. Hosted on GitHub Pages.</p>
+          <p><strong>Result</strong> a clean showcase that loads fast and explains my work clearly.</p>
+          <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div>
+        </article>
+
+        <article class="card reveal">
+          <h3>ManageEngine ServiceDesk Plus replatform</h3>
+          <p class="meta">Lowther Hall</p>
+          <p><strong>Problem</strong> fragmented helpdesk with poor visibility and manual workflows.</p>
+          <p><strong>Action</strong> implemented SDP from scratch with AD integration, mail-to-ticket, asset discovery, SLAs/approvals and knowledge base; migrated categories/templates and trained staff.</p>
+          <p><strong>Result</strong> faster triage, cleaner reporting and a helpdesk that matches how the school works.</p>
+          <div class="stack"><span>ServiceDesk Plus</span><span>AD</span><span>Exchange</span><span>PowerShell</span></div>
+        </article>
+
+        <article class="card reveal">
+          <h3>Autopilot rollout + GPO → Intune transition</h3>
+          <p class="meta">Lowther Hall</p>
+          <p><strong>Problem</strong> legacy imaging and GPO led to slow builds and drift.</p>
+          <p><strong>Action</strong> mapped existing GPO settings, recreated them in Intune (configuration profiles, baselines, naming, ESP, compliance), packaged Win32 apps, planned cutover and documented.</p>
+          <p><strong>Result</strong> reliable zero-touch provisioning with consistent policy state.</p>
+          <div class="stack"><span>Intune</span><span>Autopilot</span><span>Config profiles</span><span>PowerShell</span></div>
+        </article>
+
+        <article class="card reveal">
+          <h3>Buyer-seller mobile interface</h3>
+          <p class="meta">Melbourne Institute of Technology · Mar 2021 to Oct 2021</p>
+          <p>Built during my degree. B2B interface with payments — won “Second Best Project Award”.</p>
+          <div class="stack"><span>Python</span><span>PHP</span><span>MySQL</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Setup (desk) -->
+  <section id="setup" class="section">
+    <div class="container two-col">
+      <div class="sticky-col">
         <h2 class="section-title">Desk setup</h2>
-        <p class="section-lead">My happy place for tinkering, labbing and late-night configs.</p>
-        <div class="setup-wrap">
-          <img class="setup-img" src="img/setup1.jpg" alt="Desk setup">
-        </div>
+        <p class="section-lead">A neat workspace for tinkering and learning.</p>
       </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section id="education" class="section reveal">
-      <div class="container">
-        <h2 class="section-title">Education & Certificates</h2>
-        <div class="two-col">
-          <div class="card">
-            <h3>Bachelor of Information Technology</h3>
-            <div class="meta">Melbourne Institute of Technology · Mar 2019 – Nov 2022</div>
-            <p>Specialised in Cyber Security Principles, Advanced Network Design, and Database Management Systems.</p>
-          </div>
-          <div class="card">
-            <h3>Certificates</h3>
-            <ul class="bullets">
-              <li>Windows Server 2022 Administration</li>
-              <li>FortiGate Firewall Administration</li>
-              <li>AZ-900 Microsoft Azure Fundamentals</li>
-              <li>Active Directory &amp; Group Policy Lab</li>
-            </ul>
-          </div>
-        </div>
+      <div class="setup-wrap reveal">
+        <img class="setup-img" src="img/setup1.jpg" alt="Desk setup" />
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section alt reveal">
-      <div class="container contact-grid">
-        <div class="contact-banner card">
-          <h2 class="section-title" style="margin-bottom:.6rem;">Contact</h2>
-          <p class="section-lead">Open to roles across Melbourne — support, systems and cloud-focused positions.</p>
+  <!-- Education -->
+  <section id="education" class="section">
+    <div class="container two-col">
+      <div class="sticky-col">
+        <h2 class="section-title">Education and certificates</h2>
+        <p class="section-lead">Backed by study and lab time.</p>
+      </div>
 
-          <ul class="contact-list">
-            <li><span>Email</span><a href="mailto:sumanneupane008@gmail.com">sumanneupane008@gmail.com</a></li>
-            <li><span>Phone</span><a href="tel:+61450481379">0450 481 379</a></li>
-            <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/suman-neupane-507786182?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener">/in/suman-neupane</a></li>
+      <div class="grid-2">
+        <div class="card reveal">
+          <h3>Bachelor of Information Technology</h3>
+          <p class="meta">Melbourne Institute of Technology · Mar 2019 to Nov 2022</p>
+          <p>Focused on Cyber Security Principles, Advanced Network Design and DBMS.</p>
+        </div>
+
+        <div class="card reveal">
+          <h3>Certificates</h3>
+          <ul class="bullets">
+            <li>Windows Server 2022 Administration</li>
+            <li>FortiGate Firewall Administration</li>
+            <li>AZ-900 Microsoft Azure Fundamentals</li>
+            <li>Active Directory and Group Policy Lab</li>
+            <li>Full scholarship, Institute of Engineering · Bachelor of Engineering · Jan 2018</li>
           </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <div class="cta-row" style="margin-top:.6rem;">
-            <a class="btn" href="sumann.pdf" download>Download CV</a>
-            <a class="btn btn-outline" href="mailto:sumanneupane008@gmail.com">Email me</a>
+  <!-- Contact -->
+  <section id="contact" class="section alt">
+    <div class="container contact-grid">
+      <div>
+        <h2 class="section-title">Contact</h2>
+        <p class="section-lead">Open to roles across Melbourne — support, systems and cloud-focused positions.</p>
+
+        <div class="contact-banner card reveal">
+          <h3>Let’s work together</h3>
+          <p>I’m quick to learn new stacks and I enjoy improving workflows and reliability.</p>
+          <div class="cta-row">
+            <a class="btn" href="mailto:sumanneupane008@gmail.com">Email me</a>
+            <a class="btn btn-outline" href="tel:+61450481379">Call</a>
+            <a class="btn btn-ghost" href="sumann.pdf" download>Resume</a>
           </div>
         </div>
 
         <div class="contact-cards">
-          <article class="card">
-            <h3>Why me</h3>
-            <p>Blend of hands-on support, admin-style work and project delivery; calm under pressure; happy collaborating with vendors and internal teams.</p>
-          </article>
-          <article class="card">
-            <h3>Tech I enjoy</h3>
-            <div class="tags">
-              <span>Intune</span><span>Autopilot</span><span>JAMF</span><span>M365</span>
-              <span>Exchange</span><span>VMware</span><span>PowerShell</span>
-            </div>
-          </article>
+          <div class="card reveal">
+            <h3>Details</h3>
+            <ul class="contact-list">
+              <li><span>Location</span><span>Melbourne, VIC</span></li>
+              <li><span>Email</span><span><a href="mailto:sumanneupane008@gmail.com">sumanneupane008@gmail.com</a></span></li>
+              <li><span>Phone</span><span><a href="tel:+61450481379">0450 481 379</a></span></li>
+              <li><span>Resume</span><span><a href="sumann.pdf" download>Download PDF</a></span></li>
+            </ul>
+          </div>
+
+          <div class="card reveal">
+            <h3>References</h3>
+            <details>
+              <summary>Pat Rossi · Director of IT · Melbourne Girls Grammar</summary>
+              <p>Phone 0402548886</p>
+            </details>
+            <details>
+              <summary>Hoach Nguyen · Systems and Network Engineer · Lowther Hall</summary>
+              <p>Phone 0430275495</p>
+            </details>
+          </div>
         </div>
       </div>
-    </section>
 
-  </main>
+      <!-- Working FormSubmit form -->
+      <form action="https://formsubmit.co/sumanneupane009@gmail.com" method="POST" class="card contact-form reveal">
+        <input type="hidden" name="_subject" value="New message from sumanneupane1.github.io">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://sumanneupane1.github.io/#contact">
+
+        <h3>Send a message</h3>
+        <label>
+          <span class="label">Your name</span>
+          <input required type="text" name="name" />
+        </label>
+        <label>
+          <span class="label">Email</span>
+          <input required type="email" name="email" />
+        </label>
+        <label>
+          <span class="label">Subject</span>
+          <input required type="text" name="subject" />
+        </label>
+        <label>
+          <span class="label">Message</span>
+          <textarea rows="6" name="message" required></textarea>
+        </label>
+        <button class="btn" type="submit">Send</button>
+        <p class="form-status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
 
   <footer class="site-footer">
     <div class="container">
-      © <span id="y"></span> Suman Neupane
+      <p>© <span id="year"></span> Suman Neupane</p>
     </div>
   </footer>
 
-  <!-- theme effect veil root -->
-  <div id="theme-veil-root"></div>
+  <!-- Helpers for theme/nav/year; app.js runs after -->
+  <script>
+    // initial theme from storage or system
+    (function(){
+      const saved = localStorage.getItem('sn-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (saved === 'light' || (!saved && prefersLight)) document.body.classList.add('light');
+      const btn = document.getElementById('themeToggle');
+      if (document.body.classList.contains('light')) { btn.textContent = '☀'; btn.setAttribute('aria-pressed','true'); }
+    })();
 
-  <script defer src="app.js"></script>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+    // toggle theme
+    document.getElementById('themeToggle')?.addEventListener('click', (e) => {
+      const isLight = document.body.classList.toggle('light');
+      localStorage.setItem('sn-theme', isLight ? 'light' : 'dark');
+      e.currentTarget.textContent = isLight ? '☀' : '☾';
+      e.currentTarget.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+    });
+
+    // mobile nav
+    document.querySelector('.nav-toggle')?.addEventListener('click', (e) => {
+      const list = document.querySelector('.nav-links');
+      const open = list.classList.toggle('open');
+      e.currentTarget.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script src="app.js"></script>
 </body>
 </html>
