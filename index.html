@@ -52,14 +52,16 @@
           <a class="btn" href="assets/pdf/Suman-Neupane-Resume.pdf" target="_blank" rel="noopener">Download CV</a>
           <a class="btn btn-ghost" href="#contact">Contact</a>
         </div>
+
+        <!-- Updated stats -->
         <div class="stats">
           <div class="stat card reveal">
-            <div class="stat-num" data-count="2">0</div>
+            <div class="stat-num" data-count="2.5">0</div>
             <div class="stat-label">Years experience</div>
           </div>
           <div class="stat card reveal">
-            <div class="stat-num" data-count="165">0</div>
-            <div class="stat-label">Devices refreshed</div>
+            <div class="stat-num" data-count="4">0</div>
+            <div class="stat-label">Key projects shipped</div>
           </div>
           <div class="stat card reveal">
             <div class="stat-num" data-count="15">0</div>
@@ -96,7 +98,7 @@
               <li>Managed AD accounts and GPO for staff and students. Clean onboarding and offboarding.</li>
               <li>Supported Google Workspace, M365, Synergetic, and Schoolbox.</li>
               <li>Autopilot for executive and student devices. Policy review and ESP tuning.</li>
-              <li>Owned ServiceDesk Plus rollout and admin for better ticket flow and reporting.</li>
+              <li>Rebuilt the helpdesk on ManageEngine ServiceDesk Plus with AD sync, mail to ticket, SLAs, approvals, and knowledge base.</li>
               <li>Deployed agents via GPO for asset scanning and endpoint visibility.</li>
               <li>Mail groups, rules, and permissions in Exchange Online.</li>
               <li>MITEL phones with vendor coordination. AV for assemblies, exams, livestreams.</li>
@@ -204,28 +206,41 @@
       </div>
 
       <div class="cards">
+        <!-- Portfolio website -->
         <article class="card reveal">
-          <h3>Autopilot rollout and policy clean up</h3>
+          <h3>Portfolio website that you are viewing now</h3>
+          <p class="meta">Personal project</p>
+          <p><strong>Problem</strong> my older site was static and not engaging.</p>
+          <p><strong>Action</strong> designed and built a modern single page portfolio with scroll reveals, animated stats, and responsive layout. Hosted on GitHub Pages.</p>
+          <p><strong>Result</strong> a clean showcase that loads fast and explains my work clearly.</p>
+          <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div>
+        </article>
+
+        <!-- ServiceDesk Plus -->
+        <article class="card reveal">
+          <h3>ManageEngine ServiceDesk Plus replatform</h3>
           <p class="meta">Lowther Hall</p>
-          <p><strong>Problem</strong> long imaging times and inconsistent policies.</p>
-          <p><strong>Action</strong> cleaned device records, set naming standards, tuned ESP, packaged apps.</p>
-          <p><strong>Result</strong> fresh devices ready in under 45 minutes with stable policy state next term.</p>
-          <div class="stack"><span>Intune</span><span>Autopilot</span><span>PowerShell</span></div>
+          <p><strong>Problem</strong> fragmented helpdesk with poor visibility and manual workflows.</p>
+          <p><strong>Action</strong> implemented ServiceDesk Plus from scratch with AD integration, mail to ticket, asset discovery, SLAs, approval flows, and knowledge base. Trained the team and migrated categories and templates.</p>
+          <p><strong>Result</strong> faster triage, cleaner reporting, and a helpdesk that matches how the school works.</p>
+          <div class="stack"><span>ServiceDesk Plus</span><span>AD</span><span>Exchange</span><span>PowerShell</span></div>
         </article>
 
+        <!-- Autopilot and GPO to Intune -->
         <article class="card reveal">
-          <h3>JAMF app delivery fix</h3>
-          <p class="meta">Student iPads</p>
-          <p><strong>Problem</strong> apps stuck for a cohort.</p>
-          <p><strong>Action</strong> fixed certificate issue, audited smart groups and scopes, rebuilt profiles.</p>
-          <p><strong>Result</strong> 100 percent installs within 24 hours and a reusable scoping model.</p>
-          <div class="stack"><span>JAMF</span><span>Apple School Manager</span></div>
+          <h3>Autopilot rollout and GPO to Intune transition</h3>
+          <p class="meta">Lowther Hall</p>
+          <p><strong>Problem</strong> legacy imaging and GPO led to slow builds and drift.</p>
+          <p><strong>Action</strong> mapped existing GPO settings, recreated them as Intune configuration profiles and baselines, set device naming, ESP, compliance, and Win32 app packaging. Planned cutover and documented the process.</p>
+          <p><strong>Result</strong> reliable zero touch provisioning with consistent policy state.</p>
+          <div class="stack"><span>Intune</span><span>Autopilot</span><span>Config profiles</span><span>PowerShell</span></div>
         </article>
 
+        <!-- Buyer Seller app -->
         <article class="card reveal">
-          <h3>Buyer Seller mobile interface</h3>
-          <p class="meta">Mar 2021 to Oct 2021</p>
-          <p>Second Best Project Award. B2B interface with payments.</p>
+          <h3>Buyer seller mobile interface</h3>
+          <p class="meta">Melbourne Institute of Technology · Mar 2021 to Oct 2021</p>
+          <p>Built during my degree. A B2B interface with payments that won Second Best Project Award.</p>
           <div class="stack"><span>Python</span><span>PHP</span><span>MySQL</span></div>
         </article>
       </div>
