@@ -4,15 +4,28 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Suman Neupane • IT Support, Systems, Endpoints</title>
-  <meta name="description" content="Suman Neupane — Level 2 IT Support & Systems, with experience in identity, endpoints, messaging and admin." />
+  <meta name="description" content="Suman Neupane — IT Support & Systems with hands-on experience across identity, endpoints, messaging and admin." />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Stylesheet + fallback -->
+  <link id="maincss" rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      // If CSS vars are missing (stylesheet 404), point to /styles/styles.css
+      const v = getComputedStyle(document.documentElement).getPropertyValue('--bg');
+      if (!v || !v.trim()) document.getElementById('maincss').setAttribute('href', 'styles/styles.css');
+    })();
+  </script>
+
+  <meta name="theme-color" content="#2e374c" />
 </head>
 <body>
 
-  <!-- progress bar for scroll -->
+  <!-- scroll progress -->
   <div class="progress-bar" id="progress"></div>
 
   <!-- header -->
@@ -49,7 +62,7 @@
       <div class="container hero-grid">
         <div>
           <a class="linkedin-hero" href="https://www.linkedin.com/in/suman-neupane-507786182?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener">
-            <svg class="li-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zm7.98 0h3.84v2.11h.05c.54-1.02 1.86-2.11 3.84-2.11C20.68 8.5 24 10.77 24 16.01V24h-4v-7.14c0-1.7-.03-3.88-2.36-3.88-2.36 0-2.72 1.84-2.72 3.75V24h-4V8.5z"/></svg>
+            <svg class="li-ic" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zm7.98 0h3.84v2.11h.05c.54-1.02 1.86-2.11 3.84-2.11C20.68 8.5 24 10.77 24 16.01V24h-4v-7.14c0-1.7-.03-3.88-2.36-3.88-2.36 0-2.72 1.84-2.72 3.75V24h-4V8.5z"/></svg>
             LinkedIn
           </a>
 
@@ -87,7 +100,7 @@
           <div class="hero-image-wrap">
             <span class="orb orb-1"></span>
             <span class="orb orb-2"></span>
-            <img class="hero-image" src="img/suman.png" onerror="this.src='img/hero.png';" alt="Suman Neupane">
+            <img class="hero-image" src="img/suman.png" onerror="this.src='img/lowtherhall.png';" alt="Suman Neupane">
           </div>
         </div>
       </div>
@@ -119,8 +132,6 @@
                 <li>MITEL phones with vendor coordination. AV for assemblies, exams, livestreams.</li>
                 <li>Executive-level IT service reporting for planning and risk.</li>
               </ul>
-
-              <!-- keyword chips -->
               <div class="tags">
                 <span>AD</span><span>Azure AD</span><span>Intune</span><span>Autopilot</span>
                 <span>JAMF</span><span>Exchange Online</span><span>ServiceDesk Plus</span>
@@ -146,8 +157,6 @@
                 <li>Coordinated disaster-ready IT kits &amp; network access; prioritized critical incidents.</li>
                 <li>Reports for management on usage, inventory and procurement.</li>
               </ul>
-
-              <!-- keyword chips -->
               <div class="tags">
                 <span>M365</span><span>AD</span><span>VMware</span><span>Azure</span>
                 <span>Exchange</span><span>FortiClient</span><span>Trend Micro</span>
@@ -246,7 +255,6 @@
         <p class="section-lead">Selected work with a quick Problem → Action → Result snapshot.</p>
 
         <div class="cards">
-          <!-- Portfolio -->
           <article class="card">
             <h3>Portfolio website you’re viewing</h3>
             <div class="meta">Personal project</div>
@@ -258,7 +266,6 @@
             </div>
           </article>
 
-          <!-- SDP Replatform -->
           <article class="card">
             <h3>ManageEngine ServiceDesk Plus replatform</h3>
             <div class="meta">Lowther Hall</div>
@@ -270,7 +277,6 @@
             </div>
           </article>
 
-          <!-- Autopilot + GPO → Intune -->
           <article class="card">
             <h3>Autopilot rollout + GPO → Intune transition</h3>
             <div class="meta">Lowther Hall</div>
@@ -362,13 +368,10 @@
     </div>
   </footer>
 
-  <!-- theme effect veil (injected by JS on toggle) -->
+  <!-- theme effect veil root -->
   <div id="theme-veil-root"></div>
 
   <script defer src="app.js"></script>
-  <script>
-    // set current year for footer (tiny nicety)
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
