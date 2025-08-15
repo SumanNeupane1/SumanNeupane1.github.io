@@ -18,7 +18,7 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 
 /* ---------- Color tokens (Dark) ---------- */
-/* Jacket red accents */
+/* Jacket red accents for dark mode */
 :root{
   --bg:#323c53;
   --bg2:#2b3347;
@@ -29,8 +29,7 @@ a{color:inherit;text-decoration:none}
   --text:#e9eef6;
   --muted:#aab3c7;
 
-  /* deep jacket red + softer red-violet for gradients */
-  --accent:#c5303a;         /* dark red */
+  --accent:#c5303a;         /* dark red (jacket) */
   --accent-2:#d66ba0;       /* soft red-violet */
 
   --outline:rgba(255,255,255,.12);
@@ -46,29 +45,29 @@ a{color:inherit;text-decoration:none}
     linear-gradient(180deg, var(--bg), var(--bg2));
 }
 
-/* ---------- Light Mode (stronger structure + borders) ---------- */
+/* ---------- Light Mode (soft pink, stronger structure) ---------- */
 body.light-mode{
-  --bg:#f3f6fb;
-  --bg2:#e9edf6;
+  --bg:#f6f7fb;
+  --bg2:#eef2f8;
   --panel:#ffffff;
   --card:#ffffff;
-  --elev:#f9fbff;
+  --elev:#fbfdff;
 
   --text:#0b1220;
   --muted:#4a5568;
 
-  /* keep a red family in light mode too */
-  --accent:#ce2e3a;
-  --accent-2:#e38ab4;
+  /* softer pinks for comfort */
+  --accent:#e8749e;        /* gentle pink (main) */
+  --accent-2:#f5b8cf;      /* lighter pink for gradients */
 
-  --outline:#e3e8f3;      /* visible borders */
-  --track:#eef2f8;
+  --outline:#e2e8f3;       /* visible borders */
+  --track:#eff3f9;
 
   --shadow:0 14px 40px rgba(15,23,42,.08);
 
   --grad-soft:
-    radial-gradient(800px 380px at 12% 10%, rgba(206,46,58,.08), transparent 60%),
-    radial-gradient(1000px 520px at 86% 14%, rgba(128,160,255,.08), transparent 60%),
+    radial-gradient(820px 420px at 12% 10%, rgba(232,116,158,.08), transparent 60%),
+    radial-gradient(1000px 520px at 86% 14%, rgba(149,164,255,.06), transparent 60%),
     linear-gradient(180deg, var(--bg), var(--bg2));
 }
 
@@ -105,7 +104,6 @@ body.light-mode .site-header{
 .nav-row{display:flex;align-items:center;justify-content:space-between;padding:.85rem 0}
 .brand{font-weight:800;letter-spacing:.4px;color:var(--text)}
 
-/* Links */
 .nav-links{display:flex;gap:1.1rem;align-items:center;margin:0;padding:0;list-style:none}
 .nav-links a{
   padding:.5rem .75rem;border-radius:12px;color:var(--text);position:relative
@@ -118,7 +116,6 @@ body.light-mode .site-header{
 .nav-links a:hover{background:var(--track)}
 .nav-links a:hover::after{transform:scaleX(1)}
 
-/* Toggle */
 .nav-toggle{display:none;background:transparent;border:0;cursor:pointer}
 .nav-toggle span{display:block;width:22px;height:2px;background:var(--text);margin:4px 0;border-radius:2px}
 
@@ -136,7 +133,7 @@ body.light-mode .site-header{
   .nav-links.open{display:flex}
 }
 
-/* Theme button */
+/* Theme btn */
 .theme-btn{
   border:1px solid var(--outline);
   background: color-mix(in oklab, var(--card) 88%, transparent);
@@ -157,7 +154,6 @@ body.light-mode .site-header{
 .section-title{font-size:clamp(1.6rem,2.6vw,2.4rem);margin:0 0 .5rem}
 .section-lead{color:var(--muted);max-width:60ch;margin:0 0 1.2rem}
 
-/* Soft separator wave between blocks */
 .section-divider{
   height:54px;margin-top:36px;
   background:
@@ -189,7 +185,7 @@ body.light-mode .section-divider{
 .card:hover{transform:translateY(-4px)}
 
 /* ===================================================================
-   Hero (smaller + BW to color on hover)
+   Hero (smaller + BW default; improved frame in light mode)
    =================================================================== */
 .hero{background:var(--grad-soft);position:relative}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center;min-height:70vh}
@@ -219,13 +215,22 @@ h1 span{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit
 .hero-visual{position:relative;display:grid;place-items:center}
 .hero-image-wrap{
   position:relative;border-radius:24px;overflow:hidden;
-  background:color-mix(in oklab, var(--card) 65%, transparent);
+  background:linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, transparent), color-mix(in oklab, var(--panel) 85%, transparent));
   border:1px solid var(--outline);box-shadow:var(--shadow);
   isolation:isolate;
   transform:scale(.82);                      /* ~20% smaller on desktop */
   transform-origin:center right;
 }
 @media(max-width:980px){ .hero-image-wrap{ transform:none; } }
+
+/* Clearer frame on light mode (border + halo) */
+body.light-mode .hero-image-wrap{
+  background:linear-gradient(180deg,#ffffff 0%,#f7f9ff 100%);
+  box-shadow:
+    0 16px 40px rgba(15,23,42,.10),
+    0 0 0 1px var(--outline),
+    0 0 0 10px color-mix(in oklab, var(--accent) 10%, transparent); /* soft pink ring */
+}
 
 .hero-image{
   width:min(520px,92vw);height:auto;display:block;
@@ -238,8 +243,8 @@ h1 span{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit
 .orb{position:absolute;border-radius:999px;filter:blur(30px);opacity:.55;pointer-events:none}
 .orb-1{width:300px;height:300px;background:rgba(206,46,58,.45);top:6%;right:10%;animation:float 12s ease-in-out infinite alternate}
 .orb-2{width:220px;height:220px;background:rgba(128,160,255,.30);bottom:8%;left:8%;animation:float 14s ease-in-out infinite alternate}
-body.light-mode .orb-1{background:rgba(206,46,58,.28)}
-body.light-mode .orb-2{background:rgba(206,46,58,.16)}
+body.light-mode .orb-1{background:rgba(232,116,158,.24)}
+body.light-mode .orb-2{background:rgba(232,116,158,.12)}
 @keyframes float{from{transform:translateY(-6px)}to{transform:translateY(8px)}}
 
 /* ===================================================================
@@ -248,7 +253,7 @@ body.light-mode .orb-2{background:rgba(206,46,58,.16)}
 .timeline{position:relative;margin:0;padding:0 0 0 1.6rem;list-style:none}
 .timeline::before{
   content:"";position:absolute;left:.6rem;top:0;bottom:0;width:2px;
-  background:linear-gradient(180deg,var(--accent) 0%, transparent 60%);opacity:.8;
+  background:linear-gradient(180deg,var(--accent) 0%, transparent 60%);opacity:.85;
   filter: drop-shadow(0 0 6px color-mix(in oklab,var(--accent) 50%, transparent));
 }
 .t-item{position:relative;margin:0 0 1.7rem}
@@ -320,7 +325,7 @@ body.light-mode .orb-2{background:rgba(206,46,58,.16)}
 .contact-list{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
 .contact-list li{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px dashed var(--outline);padding:.4rem 0}
 
-/* Form controls (visible in light mode) */
+/* Form controls */
 .contact-form input,.contact-form textarea{
   width:100%;background:transparent;border:1px solid var(--outline);
   border-radius:14px;padding:.8rem 1rem;color:var(--text)
