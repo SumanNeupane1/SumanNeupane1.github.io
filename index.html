@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- keep this path: /styles/styles.css -->
   <link rel="stylesheet" href="styles/styles.css" />
 </head>
 
@@ -387,36 +388,6 @@
       <p>© <span id="year"></span> Suman Neupane</p>
     </div>
   </footer>
-
-  <!-- Helpers for theme/nav/year; app.js runs after -->
-  <script>
-    // initial theme from storage or system
-    (function(){
-      const saved = localStorage.getItem('sn-theme');
-      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-      if (saved === 'light' || (!saved && prefersLight)) document.body.classList.add('light');
-      const btn = document.getElementById('themeToggle');
-      if (document.body.classList.contains('light')) { btn.textContent = '☀'; btn.setAttribute('aria-pressed','true'); }
-    })();
-
-    // toggle theme
-    document.getElementById('themeToggle')?.addEventListener('click', (e) => {
-      const isLight = document.body.classList.toggle('light');
-      localStorage.setItem('sn-theme', isLight ? 'light' : 'dark');
-      e.currentTarget.textContent = isLight ? '☀' : '☾';
-      e.currentTarget.setAttribute('aria-pressed', isLight ? 'true' : 'false');
-    });
-
-    // mobile nav
-    document.querySelector('.nav-toggle')?.addEventListener('click', (e) => {
-      const list = document.querySelector('.nav-links');
-      const open = list.classList.toggle('open');
-      e.currentTarget.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-
-    // footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 
   <script src="app.js"></script>
 </body>
