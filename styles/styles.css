@@ -203,8 +203,7 @@ section {
 .header-content .left-header .image img {
   width: 100%;
   height: 106%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   transition: all 0.4s ease-in-out;
   filter: grayscale(100%);
 }
@@ -438,8 +437,7 @@ section {
 .portfolios .portfolio-item img {
   width: 100%;
   height: 300px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 15px;
 }
 .portfolios .portfolio-item .hover-items {
@@ -523,8 +521,7 @@ section {
 .blogs .blog img {
   width: 100%;
   height: 300px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   filter: grayscale(100%);
@@ -994,4 +991,20 @@ section {
   .main-title h2 .bg-text {
     font-size: 2.5rem;
   }
-}/*# sourceMappingURL=styles.css.map */
+}
+
+/* === Enhancements added === */
+.sn-reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+.sn-in{opacity:1;transform:none}
+.sn-progress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--color-secondary);z-index:9999;box-shadow:0 0 12px rgba(186,184,108,.8)}
+
+/* Skill widths */
+.progress .m365{width:78%; background-color: var(--color-secondary);}
+.progress .intune{width:85%; background-color: var(--color-secondary);}
+.progress .jamf{width:80%; background-color: var(--color-secondary);}
+.progress .ad{width:82%; background-color: var(--color-secondary);}
+.progress .powershell{width:70%; background-color: var(--color-secondary);}
+.progress .networking{width:68%; background-color: var(--color-secondary);}
+.progress .vmware-hyperv{width:62%; background-color: var(--color-secondary);}
+
+/*# sourceMappingURL=styles.css.map */
