@@ -17,13 +17,13 @@
   <div class="progress-bar" aria-hidden="true"></div>
 
   <!-- Header -->
-  <header class="site-header">
+  <header class="site-header glass" id="siteHeader">
     <div class="container nav-row">
       <div class="nav-left">
-        <a class="brand" href="#home">SN</a>
+        <a class="brand" href="#home" aria-label="Go to top">SN</a>
       </div>
 
-      <nav class="nav">
+      <nav class="nav" aria-label="Primary">
         <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
           <span class="nav-toggle-bar"></span>
           <span class="nav-toggle-bar"></span>
@@ -49,7 +49,7 @@
     <div class="container hero-grid">
       <div class="hero-copy">
 
-        <!-- LinkedIn pill ABOVE the eyebrow line -->
+        <!-- LinkedIn pill -->
         <a class="linkedin-hero"
            href="https://www.linkedin.com/in/suman-neupane-507786182?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
            target="_blank" rel="noopener" aria-label="Open LinkedIn profile">
@@ -93,8 +93,10 @@
       <div class="hero-visual">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
-       <div class="hero-image-wrap interactive" id="heroFrame" aria-label="Portrait">
-    <img src="img/hero.png" alt="Suman portrait" class="hero-image" />
+
+        <!-- Interactive portrait -->
+        <div class="hero-image-wrap interactive" id="heroFrame" aria-label="Portrait">
+          <img src="img/hero.png" alt="Suman portrait" class="hero-image" />
         </div>
       </div>
     </div>
@@ -110,7 +112,7 @@
 
       <ol class="timeline">
         <li class="t-item reveal">
-          <div class="t-dot"></div>
+          <div class="t-dot" aria-hidden="true"></div>
           <article class="t-card card">
             <div class="company-head">
               <h3>IT Support and Operations</h3>
@@ -134,7 +136,7 @@
         </li>
 
         <li class="t-item reveal">
-          <div class="t-dot"></div>
+          <div class="t-dot" aria-hidden="true"></div>
           <article class="t-card card">
             <div class="company-head">
               <h3>IT Support Engineer</h3>
@@ -232,7 +234,7 @@
       </div>
 
       <div class="cards">
-        <article class="card reveal">
+        <article class="card reveal hoverable">
           <h3>Portfolio website you’re viewing</h3>
           <p class="meta">Personal project</p>
           <p><strong>Problem</strong> older site was static and not engaging.</p>
@@ -241,7 +243,7 @@
           <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div>
         </article>
 
-        <article class="card reveal">
+        <article class="card reveal hoverable">
           <h3>ManageEngine ServiceDesk Plus replatform</h3>
           <p class="meta">Lowther Hall</p>
           <p><strong>Problem</strong> fragmented helpdesk with poor visibility and manual workflows.</p>
@@ -250,7 +252,7 @@
           <div class="stack"><span>ServiceDesk Plus</span><span>AD</span><span>Exchange</span><span>PowerShell</span></div>
         </article>
 
-        <article class="card reveal">
+        <article class="card reveal hoverable">
           <h3>Autopilot rollout + GPO → Intune transition</h3>
           <p class="meta">Lowther Hall</p>
           <p><strong>Problem</strong> legacy imaging and GPO led to slow builds and drift.</p>
@@ -259,7 +261,7 @@
           <div class="stack"><span>Intune</span><span>Autopilot</span><span>Config profiles</span><span>PowerShell</span></div>
         </article>
 
-        <article class="card reveal">
+        <article class="card reveal hoverable">
           <h3>Buyer-seller mobile interface</h3>
           <p class="meta">Melbourne Institute of Technology · Mar 2021 to Oct 2021</p>
           <p>Built during my degree. B2B interface with payments — won “Second Best Project Award”.</p>
@@ -269,7 +271,7 @@
     </div>
   </section>
 
-  <!-- Setup (desk) -->
+  <!-- Setup -->
   <section id="setup" class="section">
     <div class="container two-col">
       <div class="sticky-col">
@@ -283,21 +285,21 @@
   </section>
 
   <!-- Education -->
-  <section id="education" class="section">
+  <section id="education" class="section alt">
     <div class="container two-col">
       <div class="sticky-col">
         <h2 class="section-title">Education and certificates</h2>
         <p class="section-lead">Backed by study and lab time.</p>
       </div>
 
-      <div class="grid-2">
-        <div class="card reveal">
+      <div class="cards">
+        <div class="card reveal hoverable">
           <h3>Bachelor of Information Technology</h3>
           <p class="meta">Melbourne Institute of Technology · Mar 2019 to Nov 2022</p>
           <p>Focused on Cyber Security Principles, Advanced Network Design and DBMS.</p>
         </div>
 
-        <div class="card reveal">
+        <div class="card reveal hoverable">
           <h3>Certificates</h3>
           <ul class="bullets">
             <li>Windows Server 2022 Administration</li>
@@ -312,13 +314,13 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="section alt">
+  <section id="contact" class="section">
     <div class="container contact-grid">
       <div>
         <h2 class="section-title">Contact</h2>
         <p class="section-lead">Open to roles across Melbourne — support, systems and cloud-focused positions.</p>
 
-        <div class="contact-banner card reveal">
+        <div class="contact-banner card reveal hoverable">
           <h3>Let’s work together</h3>
           <p>I’m quick to learn new stacks and I enjoy improving workflows and reliability.</p>
           <div class="cta-row">
@@ -329,7 +331,7 @@
         </div>
 
         <div class="contact-cards">
-          <div class="card reveal">
+          <div class="card reveal hoverable">
             <h3>Details</h3>
             <ul class="contact-list">
               <li><span>Location</span><span>Melbourne, VIC</span></li>
@@ -345,8 +347,8 @@
             </ul>
           </div>
 
-          <div class="card reveal">
-     <h3>References</h3>
+          <div class="card reveal hoverable">
+            <h3>References</h3>
             <ul class="bullets">
               <li><strong>Director of IT</strong> — Melbourne Girls Grammar <span class="meta">· Contact details available on request</span></li>
               <li><strong>Systems &amp; Network Engineer</strong> — Lowther Hall <span class="meta">· Contact details available on request</span></li>
@@ -356,9 +358,8 @@
         </div>
       </div>
 
-
-      <!-- Working FormSubmit form -->
-      <form action="https://formsubmit.co/sumanneupane009@gmail.com" method="POST" class="card contact-form reveal">
+      <!-- FormSubmit form -->
+      <form action="https://formsubmit.co/sumanneupane009@gmail.com" method="POST" class="card contact-form reveal hoverable">
         <input type="hidden" name="_subject" value="New message from sumanneupane1.github.io">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
@@ -392,54 +393,6 @@
       <p>© <span id="year"></span> Suman Neupane</p>
     </div>
   </footer>
-
-  <!-- Helpers for theme/nav/year; app.js runs after -->
-  <script>
-    // initial theme from storage or system (uses body.light-mode)
-    (function(){
-      const saved = localStorage.getItem('sn-theme'); // 'light' | 'dark'
-      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-      if (saved === 'light' || (!saved && prefersLight)) document.body.classList.add('light-mode');
-      const btn = document.getElementById('themeToggle');
-      if (document.body.classList.contains('light-mode')) { btn.textContent = '☀'; btn.setAttribute('aria-pressed','true'); }
-    })();
-
-    // toggle theme
-    document.getElementById('themeToggle')?.addEventListener('click', (e) => {
-      const isLight = document.body.classList.toggle('light-mode');
-      localStorage.setItem('sn-theme', isLight ? 'light' : 'dark');
-      e.currentTarget.textContent = isLight ? '☀' : '☾';
-      e.currentTarget.setAttribute('aria-pressed', isLight ? 'true' : 'false');
-
-      // optional: sweep effect hook (CSS will ignore if not present)
-      const veil = document.createElement('div');
-      veil.className = 'theme-veil';
-      veil.dataset.mode = isLight ? 'light' : 'dark';
-      document.body.appendChild(veil);
-      setTimeout(() => veil.remove(), 900);
-    });
-
-    // mobile nav
-    document.querySelector('.nav-toggle')?.addEventListener('click', (e) => {
-      const list = document.querySelector('.nav-links');
-      const open = list.classList.toggle('open');
-      e.currentTarget.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-
-    // footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // scroll progress
-    const pb = document.querySelector('.progress-bar');
-    const onScroll = () => {
-      const h = document.documentElement;
-      const sc = h.scrollTop || document.body.scrollTop;
-      const max = h.scrollHeight - h.clientHeight;
-      pb.style.width = (sc / max) * 100 + '%';
-    };
-    document.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  </script>
 
   <script src="app.js"></script>
 </body>
