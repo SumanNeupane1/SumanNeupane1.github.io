@@ -17,13 +17,13 @@
   <div class="progress-bar" aria-hidden="true"></div>
 
   <!-- Header -->
-  <header class="site-header glass" id="siteHeader">
+  <header class="site-header glass">
     <div class="container nav-row">
       <div class="nav-left">
-        <a class="brand" href="#home" aria-label="Go to top">SN</a>
+        <a class="brand" href="#home">SN</a>
       </div>
 
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav">
         <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
           <span class="nav-toggle-bar"></span>
           <span class="nav-toggle-bar"></span>
@@ -69,9 +69,9 @@
           to apply that in any environment—education, enterprise, or government.
         </p>
         <div class="cta-row">
-          <a class="btn" href="./cv.html" target="_blank" rel="noopener">Preview CV</a>
-          <a class="btn btn-ghost" href="./img/sumann.pdf" download>Download CV</a>
-          <a class="btn btn-ghost" href="#contact">Contact</a>
+          <a class="btn magnetic" href="./cv.html" target="_blank" rel="noopener">Preview CV</a>
+          <a class="btn btn-ghost magnetic" href="./img/sumann.pdf" download>Download CV</a>
+          <a class="btn btn-ghost magnetic" href="#contact">Contact</a>
         </div>
 
         <div class="stats">
@@ -93,10 +93,9 @@
       <div class="hero-visual">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
-
-        <!-- Interactive portrait -->
-        <div class="hero-image-wrap interactive" id="heroFrame" aria-label="Portrait">
-          <img src="img/hero.png" alt="Suman portrait" class="hero-image" />
+        <div class="hero-image-wrap" data-tilt>
+          <img src="img/hero.png" alt="Suman portrait" class="hero-image" decoding="async" />
+          <span class="hero-shine" aria-hidden="true"></span>
         </div>
       </div>
     </div>
@@ -112,11 +111,11 @@
 
       <ol class="timeline">
         <li class="t-item reveal">
-          <div class="t-dot" aria-hidden="true"></div>
+          <div class="t-dot"></div>
           <article class="t-card card">
             <div class="company-head">
               <h3>IT Support and Operations</h3>
-              <img class="company-logo" src="img/lowtherhall.png" alt="Lowther Hall logo" loading="lazy">
+              <img class="company-logo" src="img/lowtherhall.png" alt="Lowther Hall logo" loading="lazy" decoding="async">
             </div>
             <p class="meta">Lowther Hall Anglican Grammar School · Dec 2024 to Present · Melbourne</p>
             <ul class="bullets">
@@ -136,11 +135,11 @@
         </li>
 
         <li class="t-item reveal">
-          <div class="t-dot" aria-hidden="true"></div>
+          <div class="t-dot"></div>
           <article class="t-card card">
             <div class="company-head">
               <h3>IT Support Engineer</h3>
-              <img class="company-logo" src="img/jlg.png" alt="Johns Lyng Group logo" loading="lazy">
+              <img class="company-logo" src="img/jlg.png" alt="Johns Lyng Group logo" loading="lazy" decoding="async">
             </div>
             <p class="meta">Johns Lyng Group · Emergency Recovery Victoria · Dec 2022 to Sep 2024</p>
             <ul class="bullets">
@@ -234,7 +233,7 @@
       </div>
 
       <div class="cards">
-        <article class="card reveal hoverable">
+        <article class="card reveal hover-lift">
           <h3>Portfolio website you’re viewing</h3>
           <p class="meta">Personal project</p>
           <p><strong>Problem</strong> older site was static and not engaging.</p>
@@ -243,7 +242,7 @@
           <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div>
         </article>
 
-        <article class="card reveal hoverable">
+        <article class="card reveal hover-lift">
           <h3>ManageEngine ServiceDesk Plus replatform</h3>
           <p class="meta">Lowther Hall</p>
           <p><strong>Problem</strong> fragmented helpdesk with poor visibility and manual workflows.</p>
@@ -252,7 +251,7 @@
           <div class="stack"><span>ServiceDesk Plus</span><span>AD</span><span>Exchange</span><span>PowerShell</span></div>
         </article>
 
-        <article class="card reveal hoverable">
+        <article class="card reveal hover-lift">
           <h3>Autopilot rollout + GPO → Intune transition</h3>
           <p class="meta">Lowther Hall</p>
           <p><strong>Problem</strong> legacy imaging and GPO led to slow builds and drift.</p>
@@ -261,7 +260,7 @@
           <div class="stack"><span>Intune</span><span>Autopilot</span><span>Config profiles</span><span>PowerShell</span></div>
         </article>
 
-        <article class="card reveal hoverable">
+        <article class="card reveal hover-lift">
           <h3>Buyer-seller mobile interface</h3>
           <p class="meta">Melbourne Institute of Technology · Mar 2021 to Oct 2021</p>
           <p>Built during my degree. B2B interface with payments — won “Second Best Project Award”.</p>
@@ -279,27 +278,27 @@
         <p class="section-lead">A neat workspace for tinkering and learning.</p>
       </div>
       <div class="setup-wrap reveal">
-        <img class="setup-img" src="img/setup1.jpg" alt="Desk setup" />
+        <img class="setup-img" src="img/setup1.jpg" alt="Desk setup" loading="lazy" decoding="async" />
       </div>
     </div>
   </section>
 
   <!-- Education -->
-  <section id="education" class="section alt">
+  <section id="education" class="section">
     <div class="container two-col">
       <div class="sticky-col">
         <h2 class="section-title">Education and certificates</h2>
         <p class="section-lead">Backed by study and lab time.</p>
       </div>
 
-      <div class="cards">
-        <div class="card reveal hoverable">
+      <div class="grid-2">
+        <div class="card reveal hover-lift">
           <h3>Bachelor of Information Technology</h3>
           <p class="meta">Melbourne Institute of Technology · Mar 2019 to Nov 2022</p>
           <p>Focused on Cyber Security Principles, Advanced Network Design and DBMS.</p>
         </div>
 
-        <div class="card reveal hoverable">
+        <div class="card reveal hover-lift">
           <h3>Certificates</h3>
           <ul class="bullets">
             <li>Windows Server 2022 Administration</li>
@@ -314,13 +313,13 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="section">
+  <section id="contact" class="section alt">
     <div class="container contact-grid">
       <div>
         <h2 class="section-title">Contact</h2>
         <p class="section-lead">Open to roles across Melbourne — support, systems and cloud-focused positions.</p>
 
-        <div class="contact-banner card reveal hoverable">
+        <div class="contact-banner card reveal">
           <h3>Let’s work together</h3>
           <p>I’m quick to learn new stacks and I enjoy improving workflows and reliability.</p>
           <div class="cta-row">
@@ -331,11 +330,11 @@
         </div>
 
         <div class="contact-cards">
-          <div class="card reveal hoverable">
+          <div class="card reveal">
             <h3>Details</h3>
             <ul class="contact-list">
               <li><span>Location</span><span>Melbourne, VIC</span></li>
-              <li><span>Email</span><span><a href="mailto:sumanneupane008@gmail.com">sumanneupane008@gmail.com</a></span></li>
+              <li><span>Email</span><span><a data-tip="Copied!" href="mailto:sumanneupane008@gmail.com">sumanneupane008@gmail.com</a></span></li>
               <li><span>Phone</span><span><a href="tel:+61450481379">0450 481 379</a></span></li>
               <li>
                 <span>Resume</span>
@@ -347,7 +346,7 @@
             </ul>
           </div>
 
-          <div class="card reveal hoverable">
+          <div class="card reveal">
             <h3>References</h3>
             <ul class="bullets">
               <li><strong>Director of IT</strong> — Melbourne Girls Grammar <span class="meta">· Contact details available on request</span></li>
@@ -359,7 +358,7 @@
       </div>
 
       <!-- FormSubmit form -->
-      <form action="https://formsubmit.co/sumanneupane009@gmail.com" method="POST" class="card contact-form reveal hoverable">
+      <form action="https://formsubmit.co/sumanneupane009@gmail.com" method="POST" class="card contact-form reveal">
         <input type="hidden" name="_subject" value="New message from sumanneupane1.github.io">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
